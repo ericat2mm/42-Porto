@@ -12,7 +12,7 @@
 
 //#include <stdio.h>
 
-char	*ft_srcpy(char *dest, char *src, unsigned int n)
+char	*ft_strncpy(char *dest, char *src, unsigned int n)
 {
 	unsigned int	i;
 
@@ -36,6 +36,6 @@ char	*ft_srcpy(char *dest, char *src, unsigned int n)
     char dest[] = "";
     
     printf("%s", dest);
-    ft_strcpy(dest,src,15);
+    ft_strncpy(dest,src,15);
     printf("%s", dest);
 }*/
