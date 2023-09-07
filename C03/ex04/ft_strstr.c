@@ -6,7 +6,7 @@
 /*   By: emedeiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 14:39:21 by emedeiro          #+#    #+#             */
-/*   Updated: 2023/09/06 14:52:33 by emedeiro         ###   ########.fr       */
+/*   Updated: 2023/09/06 16:48:01 by emedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,30 +15,34 @@
 char	*ft_strstr(char *str, char *to_find)
 {
 	int	i;
+	int	j;
 
 	i = 0;
+	j = 0;
 	while (str[i] != '\0')
+	{
+		j = 0;
+		if (str[i] == to_find[j])
 		{
-			j = 0;
-			if (str[i] == to_find[j])
+			while (to_find[j] != '\0')
 			{
-				while (to_find[i] != '\0')
-					{
-						while (str[i + j] == to_find[j])
-							j++;
-						if (to_find[j] == '\0')
-							return (&str[i]);
-						break;
-					}
+				while (str[i + j] == to_find[j])
+					j++;
+				if (to_find[j] == '\0')
+					return (&str[i]);
+				break ;
 			}
-			i++;
 		}
-	return (&str[i]);
+		i++;
+	}
+	return (0);
 }
 
-/*int	main(int argc, char **argv)
+/*int	main()
 {
-	if (argc == 3)
-		printf("%s", ft_strstr(argv[1], argv[2]));
-}*/
+	char str[] = "o cao comeu o gato";
+	char to_find[] = "comeu";
 
+	printf("%s", ft_strstr(str, to_find));
+	return (0);
+}*/
