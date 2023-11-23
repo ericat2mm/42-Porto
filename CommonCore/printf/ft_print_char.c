@@ -6,13 +6,13 @@
 /*   By: emedeiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 12:29:22 by emedeiro          #+#    #+#             */
-/*   Updated: 2023/11/17 12:45:53 by emedeiro         ###   ########.fr       */
+/*   Updated: 2023/11/21 11:59:23 by emedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int ft_print_char(unsigned char s)
+int	ft_print_char(unsigned char c)
 {
-	return (write(1, &s, 1));
+	return (write(1, &c, 1));
 }
