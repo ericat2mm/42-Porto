@@ -87,7 +87,7 @@ char	*ft_read_file(int fd, char res)
 		if (byte_read == -1)
 		{
 			free(buffer);
-			return (NULL);
+			return (free(res), NULL);
 		}
 		buffer[byte_read] = 0;
 		res = ft_free(res, buffer);
@@ -111,4 +111,16 @@ char	*ft_get_next_line(int fd)
 	line = ft_extract_line(buffer);
 	buffer = ft_next_line(buffer);
 	return (line);
+}
+
+int main (void)
+{
+	char *fixe;
+        int fd;
+
+        while ((fixe = get_next_line(fd)))
+        {
+              printf("%s", fixe);
+              free(fixe);
+	}
 }
