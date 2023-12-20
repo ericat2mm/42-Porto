@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: emedeiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/07 11:41:23 by emedeiro          #+#    #+#             */
-/*   Updated: 2023/12/07 11:41:57 by emedeiro         ###   ########.fr       */
+/*   Created: 2023/12/07 11:43:26 by emedeiro          #+#    #+#             */
+/*   Updated: 2023/12/07 11:43:49 by emedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,29 +95,49 @@ char	*read_file(int fd, char *res)
 
 char	*get_next_line(int fd)
 {
-	static char	*buffer;
+	static char	*buffer[FOPEN_MAX];
 	char		*line;
 
-	if (fd < 0 || BUFFER_SIZE <= 0)
+	if (fd < 0 || BUFFER_SIZE <= 0 || fd > FOPEN_MAX)
 		return (NULL);
-	buffer = read_file(fd, buffer);
-	if (!buffer)
+	buffer[fd] = read_file(fd, buffer[fd]);
+	if (!buffer[fd])
 		return (NULL);
-	line = ft_line(buffer);
-	buffer = ft_next(buffer);
+	line = ft_line(buffer[fd]);
+	buffer[fd] = ft_next(buffer[fd]);
 	return (line);
 }
 
 /*int	main(void)
 {
-	char	*fixe;
+	char	*ret;
 	int	fd;
-
-	fd = open("files",O_RDONLY);
-	while ((fixe = get_next_line(fd)))
+	int	fd1;
+	int	i;
+	int	j;
+	
+	fd = open("txt1.txt",O_RDONLY);
+	fd1 = open("txt2.txt", O_RDONLY);
+	i = 1;
+	j = 0;
+	while ((ret = get_next_line(fd)))
 	{
-		printf("%s", fixe);
-		free(fixe);
+		if (j % 2 == 0)
+		{
+			ret = get_next_line(fd1);
+			j++;
+		}
+		else
+		{
+			ret = get_next_line(fd);
+			j++;
+		}
+		printf("%s\n", ret);
+		free(ret);
+		i++;
 	}
+	close(fd);
+	close(fd1);
+	return (0);
 }
 */
