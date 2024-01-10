@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   swap_a.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: emedeiro <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/01/09 23:14:06 by emedeiro          #+#    #+#             */
+/*   Updated: 2024/01/09 23:14:08 by emedeiro         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 void   swap_a(int *sa)
@@ -7,6 +19,5 @@ void   swap_a(int *sa)
     temp_var = sa[0];
     sa[0] = sa[1];
     sa[1] = temp_var;
-    //escrever a operacao na variavel operations
     write(1, "sa\n", 3);
 }

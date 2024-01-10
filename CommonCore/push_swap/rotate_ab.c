@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   rotate_ab.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: emedeiro <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/01/09 23:13:17 by emedeiro          #+#    #+#             */
+/*   Updated: 2024/01/09 23:13:19 by emedeiro         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 void    rotate_ab(t_list *lista)
@@ -16,6 +28,5 @@ void    rotate_ab(t_list *lista)
         swap(&lista->stack_b[index], &lista->stack_b[index + 1]);
         index++;
     }
-    //escrever a operacao na variavel operations
     write(1, "rr\n", 3);
 } 

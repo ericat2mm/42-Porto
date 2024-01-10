@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   push_a.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: emedeiro <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/01/09 23:10:50 by emedeiro          #+#    #+#             */
+/*   Updated: 2024/01/09 23:10:52 by emedeiro         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 void    push_a(t_list *lista)
@@ -25,6 +37,5 @@ void    push_a(t_list *lista)
         lista->stack_b[index] = lista->stack_b[index + 1];
         index++;
     }
-    //escrever a operacao na variavel operations
     write(1, "pa\n", 3);
 }

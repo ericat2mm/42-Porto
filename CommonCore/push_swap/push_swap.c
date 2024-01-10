@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: emedeiro <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/01/09 23:09:42 by emedeiro          #+#    #+#             */
+/*   Updated: 2024/01/09 23:10:06 by emedeiro         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 //quero um main para o meu push swap que receba os numeros como argumentos e armazene em uma pilha
 //depois quero que ele verifique se os numeros são repetidos
@@ -53,4 +65,5 @@ int main(int argc, char **argv)
     }
     print_stack(lista);
     push_a(lista);
-    print
+    print_stack(lista);
+}

@@ -1,3 +1,14 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: emedeiro <marvin@42.fr>                    +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2024/01/09 23:09:11 by emedeiro          #+#    #+#              #
+#    Updated: 2024/01/10 02:34:26 by emedeiro         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
 
 NAME = push_swap
 
@@ -13,20 +24,19 @@ SRCS = push_a.c push_b.c push_ab.c print_stack.c reverse_rotate_a.c\
 
 OBJS = $(SRCS:.c=.o)
 
-all: $(NAME)   
+all: $(NAME)
 
 $(NAME): $(OBJS) $(LIBFT)
-    $(CC) $(CFLAGS) $(OBJS) $(LIBFT) -o $(NAME)
+	$(CC) $(CFLAGS) -c $< -o $(OBJS)
 
 $(LIBFT):
-    make -C $(LIBFT_DIR)
+	make -C $(LIBFT_DIR)
 
 clean:
-    rm -rf $(OBJS)
-    make clean -C $(LIBFT_DIR)
+	rm -rf $(OBJS) $(LIBFT_DIR)
 
 fclean: clean
-    rm -rf $(NAME)
-    make fclean -C $(LIBFT_DIR)
+	rm -rf $(NAME) $(LIBFT_DIR)
 
 re: fclean all
+
