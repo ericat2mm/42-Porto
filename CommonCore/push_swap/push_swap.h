@@ -15,6 +15,7 @@
 
 #include "libft/libft.h"
 #include <stddef.h>
+#include <limits.h>
 
 typedef struct  s_list
 {
