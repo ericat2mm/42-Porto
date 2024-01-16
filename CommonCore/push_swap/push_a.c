@@ -12,7 +12,7 @@
 
 #include "push_swap.h"
 
-void    push_a(t_list *lista)
+void    push_a(s_list *lista)
 {
     int index;
 

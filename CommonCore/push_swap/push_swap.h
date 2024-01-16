@@ -14,8 +14,9 @@
 # define PUSH_SWAP_H
 
 #include "libft/libft.h"
+#include <stddef.h>
 
-typedef struct  list
+typedef struct  s_list
 {
     int stack_a;
     int stack_b;
