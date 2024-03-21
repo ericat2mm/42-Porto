@@ -18,7 +18,6 @@ tack *creation_of_stacks_more_argcs(int argc, char **argv)
     
     lista = malloc(sizeof(tack));
     lista->size_a = argc - 1;
-    ft_printf("asgd");
     lista->size_b = 0;
     lista->stack_a = malloc(sizeof(int) * lista->size_a);
     lista->stack_b = malloc(sizeof(int) * lista->size_b);
@@ -31,7 +30,7 @@ tack *creation_of_stacks_more_argcs(int argc, char **argv)
     }
     while (argc > 1)
     {
-        lista->stack_a[argc - 2] = ft_atoi(argv[argc - 1]);
+        lista->stack_a[argc - 2] = ft_atol(argv[argc - 1]);
         argc--;
     }
     return (lista);
@@ -40,8 +39,7 @@ tack *creation_of_stacks_more_argcs(int argc, char **argv)
 tack *creation_of_stacks_two_argcs(char **temporary)
 {
     tack *lista;
-    int i;
-
+    long i;
     
     lista = malloc(sizeof(tack));
     if (lista == NULL)
@@ -61,7 +59,7 @@ tack *creation_of_stacks_two_argcs(char **temporary)
     i = 0;
     while (i < lista->size_a)
     {
-        lista->stack_a[i] = ft_atoi(temporary[i]);
+        lista->stack_a[i] = ft_atol(temporary[i]);
         i++;
     }
     return (lista);
@@ -81,17 +79,17 @@ int is_sorted(int size, int *stack)
     return (0);
 }
 
-int find_min_index(int *stack_a, int size_a)
+int find_min_index(tack *lista)
 {
     int min_index;
     int i;
 
-    min_index = stack_a[0];
+    min_index = lista->stack_a[0];
     i = 0;
-    while (i != size_a)
+    while (i != lista->size_a)
     {
-        if (stack_a[i] < min_index)
-            min_index = stack_a[i];
+        if (lista->stack_a[i] < min_index)
+            min_index = lista->stack_a[i];
         i++;
     }
     return (min_index);

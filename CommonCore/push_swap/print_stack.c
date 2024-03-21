@@ -13,20 +13,30 @@
 #include "push_swap.h"
 
 //imprimir a lista da stack a
-void print_list_stack_a(int *lista, int size)
+void print_list_stack_a(tack *lista)
 {
     int i;
 
     i = 0;
-    while (i < size)
+    while (i < lista->size_a)
     {
-        ft_putnbr(lista[i]);
+        ft_putnbr(lista->stack_a[i]);
         write(1, "\n", 1);
         i++;
     }
 }
+void print_list_stack_b(tack *lista)
+{
+    int i;
 
-
+    i = 0;
+    while (i < lista->size_b)
+    {
+        ft_putnbr(lista->stack_b[i]);
+        write(1, "\n", 1);
+        i++;
+    }
+}
 void ft_putnbr(int n)
 {
     char c;

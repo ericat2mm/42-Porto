@@ -23,18 +23,19 @@ typedef struct stack
     int *stack_b;
     int size_a;
     int size_b;
-    int *array;
+    int lowest;
+    int highest;
 }   tack;
 
 //algorithm
-void push_a(int *stack_a, int *stack_b);
-void push_b(int *stack_a, int *stack_b);
-void    rotate_a(int *stack_a, int size_a);
-void    rotate_b(int *stack_b, int size_b);
-void    rotate_ab(int *stack_a, int size_a, int *stack_b, int size_b);
-void    reverse_rotate_a(int *stack_a, int size_a);
-void    reverse_rotate_b(int *stack_b, int size_b);
-void    reverse_rotate_ab(int *stack_a, int size_a, int *stack_b, int size_b);
+void push_a(tack *lista);
+void push_b(tack *lista);
+void    rotate_a(tack *lista);
+void    rotate_b(tack *lista);
+void    rotate_ab(tack *lista);
+void    reverse_rotate_a(tack *lista);
+void    reverse_rotate_b(tack *lista);
+void    reverse_rotate_ab(tack *lista);
 void    swap(int *argv1, int *argv2);
 void    swap_a(int *sa);
 void    swap_b(int *sb);
@@ -57,22 +58,23 @@ void   ft_putnbr(int n);
 int   is_sorted(int size_a, int *stack_a);
 
 //Sort Functions
-void  define_sort(int *stack_a, int size_a, int *stack_b, int size_b);
-void  sort_three(int *stack_a);
-void sort_four(int *stack_a, int *stack_b, int size_a);
-void sort_five(int *stack_a, int *stack_b, int size_a);
-void sort_big(int *stack_a, int *stack_b, int size_a, int size_b);
+void  define_sort(tack *lista);
+void  sort_three(tack *lista);
+void sort_four(tack *lista);
+void sort_five(tack *lista);
+void sort_big(tack *lista);
 
 //Print Function
-void   print_list_stack_a(int *lista, int size);
+void   print_list_stack_a(tack *lista);
+void print_list_stack_b(tack *lista);
+
 
 //Utils Functions
-int find_min_index(int *stack_a, int size_a);
-void rotate_to_top(int *stack_a, int size_a, int min_index);
-int is_empty(int size_a, int size_b);
-void sort_array(int *stack_a, int size_a);
-void create_chunk(int *stack_a, int size_a, int *stack_b, int chunk_size);
-void quick_sort(int *stack, int size);
-int partition(int *stack, int low, int high);
-void quick_sort_recursive(int *stack, int low, int high);
+int find_min_index(tack *lista);
+void turkish_algorithm_to_b(tack *lista);
+void turkish_algorithm_to_a(tack *lista);
+int get_lowest(tack *lista);
+int get_highest(tack *lista);
+int distance(int end, int start);
+void sort_list(tack *lista, int target);
 #endif

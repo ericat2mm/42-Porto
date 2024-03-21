@@ -12,43 +12,43 @@
 
 #include "push_swap.h"
 
-void push_a(int *stack_a, int *stack_b)
+void push_a(tack *lista)
 {
-    if (stack_b[0] == 0)
+    if (lista->stack_b[0] == 0)
         return;
     int i = 0;
-    while (stack_a[i] != 0)
+    while (lista->stack_a[i] != 0)
         i++;
     while (i > 0) {
-        stack_a[i] = stack_a[i - 1];
+        lista->stack_a[i] = lista->stack_a[i - 1];
         i--;
     }
-    stack_a[0] = stack_b[0];
+    lista->stack_a[0] = lista->stack_b[0];
     i = 0;
-    while (stack_b[i] != 0) {
-        stack_b[i] = stack_b[i + 1];
+    while (lista->stack_b[i] != 0) {
+        lista->stack_b[i] = lista->stack_b[i + 1];
         i++;
     }
     write(1, "pa\n", 3);
 }
-void push_b(int *stack_a, int *stack_b)
+void push_b(tack *lista)
 {
-    if (stack_a[0] == 0)
+    if (lista->stack_a[0] == 0)
         return;
     int i = 0;
-    while (stack_b[i] != 0)
+    while (lista->stack_b[i] != 0)
         i++;
     while (i > 0)
     {
-        stack_b[i] = stack_b[i - 1];
+        lista->stack_b[i] = lista->stack_b[i - 1];
         i--;
     }
-    stack_b[0] = stack_a[0];
+    lista->stack_b[0] = lista->stack_a[0];
 
     i = 0;
-    while (stack_a[i] != 0)
+    while (lista->stack_a[i] != 0)
     {
-        stack_a[i] = stack_a[i + 1];
+        lista->stack_a[i] = lista->stack_a[i + 1];
         i++;
     }
     write(1, "pb\n", 3);
