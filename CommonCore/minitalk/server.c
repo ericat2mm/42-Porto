@@ -12,6 +12,10 @@
 
 #include "minitalk.h"
 
+//esta função é chamada quando o servidor recebe um sinal do cliente
+//vai ter alocacao de memoria dinamica
+//quero funcoes de 25 linhas no maximo
+
 void ft_receive_message(int sig) {
     static char message[1024];
     static int bit = 0;
