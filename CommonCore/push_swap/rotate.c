@@ -1,56 +1,47 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rotate.c                                         :+:      :+:    :+:   */
+/*   rotate.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: emedeiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/09 23:12:57 by emedeiro          #+#    #+#             */
-/*   Updated: 2024/01/09 23:12:59 by emedeiro         ###   ########.fr       */
+/*   Created: 2024/06/19 14:07:24 by emedeiro          #+#    #+#             */
+/*   Updated: 2024/06/19 19:32:51 by emedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void rotate_a(tack *lista)
+void    rotate(t_stack_node **stack)
 {
-    int temporary;
-    int i;
+    t_stack_node *last_node;
 
-    if (lista->size_a <= 1)
-        return;
-    temporary = lista->stack_a[0];
-    i = 0;
-    while (i < lista->size_a - 1)
-    {
-        lista->stack_a[i] = lista->stack_a[i + 1];
-        i++;
-    }
-    lista->stack_a[lista->size_a - 1] = temporary;
-    write(1, "ra\n", 3);
+    if (!*stack || !(*stack)->next)
+        return ;
+    last_node = find_last_node(*stack);
+    last_node->next = *stack;
+    *stack = (*stack)->next;
+    last_node->next->next = NULL;
+    last_node->next->previous = last_node;
+    last_node->next->next = NULL;
 }
 
-void    rotate_b(tack *lista)
+void rotate_a(t_stack_node **a, bool print)
 {
-    int temporary;
-    int i;
-
-    if (lista->size_b <= 1)
-        return;
-    temporary = lista->stack_b[0];
-    i = 0;
-    while (i < lista->size_b - 1)
-    {
-        lista->stack_b[i] = lista->stack_b[i + 1];
-        i++;
-    }
-    lista->stack_b[lista->size_b - 1] = temporary;
-    write(1, "rb\n", 3);
-} 
-
-void    rotate_ab(tack *lista)
+    rotate(a);
+    if (!print)
+        ft_printf("ra\n");
+}
+void    rotate_b(t_stack_node **b, bool print)
 {
-    rotate_a(lista);
-    rotate_b(lista);
-    write(1, "rr\n", 3);
-} 
+    rotate(b);
+    if (!print)
+        ft_printf("rb\n");
+}
+void    rr(t_stack_node **a, t_stack_node **b, bool print)
+{
+    rotate(a);
+    rotate(b);
+    if (!print)
+        ft_printf("rr\n");
+}

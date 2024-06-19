@@ -1,55 +1,50 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push.c                                           :+:      :+:    :+:   */
+/*   push.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: emedeiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/09 23:10:50 by emedeiro          #+#    #+#             */
-/*   Updated: 2024/01/09 23:10:52 by emedeiro         ###   ########.fr       */
+/*   Created: 2024/06/19 14:07:57 by emedeiro          #+#    #+#             */
+/*   Updated: 2024/06/19 18:01:07 by emedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void push_a(tack *lista)
+void    push(t_stack_node **a, t_stack_node **b)
 {
-    if (lista->stack_b[0] == 0)
-        return;
-    int i = 0;
-    while (lista->stack_a[i] != 0)
-        i++;
-    while (i > 0) {
-        lista->stack_a[i] = lista->stack_a[i - 1];
-        i--;
-    }
-    lista->stack_a[0] = lista->stack_b[0];
-    i = 0;
-    while (lista->stack_b[i] != 0) {
-        lista->stack_b[i] = lista->stack_b[i + 1];
-        i++;
-    }
-    write(1, "pa\n", 3);
-}
-void push_b(tack *lista)
-{
-    if (lista->stack_a[0] == 0)
-        return;
-    int i = 0;
-    while (lista->stack_b[i] != 0)
-        i++;
-    while (i > 0)
-    {
-        lista->stack_b[i] = lista->stack_b[i - 1];
-        i--;
-    }
-    lista->stack_b[0] = lista->stack_a[0];
+    t_stack_node *tmp;
 
-    i = 0;
-    while (lista->stack_a[i] != 0)
+    if (!*b)
+        return ;
+    tmp = *b;
+    *b = (*b)->next;
+    if (*b)
+        (*b)->previous = NULL;
+    tmp->previous = NULL;
+    if (!*a)
     {
-        lista->stack_a[i] = lista->stack_a[i + 1];
-        i++;
+        *a = tmp;
+        tmp->next = NULL;
     }
-    write(1, "pb\n", 3);
+    else
+    {
+        tmp->next = *a;
+        (*a)->previous = tmp;
+        *a = tmp;
+    }
+}
+void	pa(t_stack_node **a, t_stack_node **b, bool print) 
+{
+	push(a, b); 
+	if (!print) 
+		ft_printf("pa\n");
+}
+
+void	pb(t_stack_node **b, t_stack_node **a, bool print)
+{
+    push(b, a);
+    if (!print)
+        ft_printf("pb\n");
 }

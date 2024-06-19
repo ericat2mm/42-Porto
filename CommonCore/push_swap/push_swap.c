@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: emedeiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/09 23:09:42 by emedeiro          #+#    #+#             */
-/*   Updated: 2024/03/18 16:05:55 by emedeiro         ###   ########.fr       */
+/*   Created: 2024/06/19 10:02:32 by emedeiro          #+#    #+#             */
+/*   Updated: 2024/06/19 19:53:51 by emedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,25 @@
 
 int main(int argc, char **argv)
 {
-	if (argc < 2)
-		return (0);
+    t_stack_node *a;
+    t_stack_node *b;
+
+    a = NULL;
+    b = NULL;
+    if (argc < 2)
+        return (0);
     if (argc == 2)
-		two_argcs_logic(argv);
-    else if (argc > 2)
-		more_argcs_logic(argc, argv);
+        argv = ft_split(argv[1], ' ');
+    initialization_of_stack_a(&a, argv + 1);
+    if(!is_sorted(a))
+    {
+        if (stack_size(a) == 2)
+            swap(&a);
+        else if (stack_size(a) == 3)
+            sort_three(&a);
+        else if (stack_size(a) > 3)
+            turkish_algorithm(&a, &b);
+    }
+    free_stack(a);
     return (0);
 }

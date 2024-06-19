@@ -5,59 +5,45 @@
 #                                                     +:+ +:+         +:+      #
 #    By: emedeiro <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/01/09 23:09:11 by emedeiro          #+#    #+#              #
-#    Updated: 2024/03/13 12:16:34 by emedeiro         ###   ########.fr        #
+#    Created: 2024/06/19 14:31:06 by emedeiro          #+#    #+#              #
+#    Updated: 2024/06/19 19:31:32 by emedeiro         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-			####		Colors 			####
-RED = \033[0;31m
-GREEN = \033[0;32m
-YELLOW = \033[0;33m
-RESET = \033[0m
+	#Compiling Variables#
+CC		 = cc
+CFLAGS	 = -g -Wall -Wextra -Werror
 
-			#### 	Color Menssages		####
-MAKE_MESSAGE = "$(RED)MAKE done by emedeiro$(RESET)"
-CLEAN_MESSAGE = "$(YELLOW)CLEAN done by emedeiro$(RESET)"
-FCLEAN_MESSAGE = "$(GREEN)FCLEAN done by emedeiro$(RESET)"
+	#Names#
+NAME	= push_swap
 
-			####		Variables     ####
-NAME = push_swap
+	#LIBFT Variables#
+LIBFT		= ./libft/libft.a
 
-			####	Compiling Variables	####
-CC = cc
-CFLAGS = -g -Wall -Wextra -Werror
-
-			####	Libft Variables		####
-LIBFT = ./libft_modified/libft.a
-
-			####Sources Variables####
-SRCS =	push.c swap.c rotate.c reverse_rotate.c\
-		push_swap.c stacks_utils.c sort_stack.c\
-		print_stack.c args.c main_logic.c sort_big_utils.c
+	#Sources#
+SRCS =	handle_errors.c init_node_b.c init_node_a.c init_stack_a.c push_swap.c \
+		push.c reverse_rotate.c rotate.c sort_stacks.c stack_utils.c swap.c
 
 OBJS = $(SRCS:.c=.o)
+##################### MAKEFILE RULES ##########################
 
-
-			####		Rules			####
 all: $(LIBFT) $(NAME)
-	@echo $(MAKE_MESSAGE)
 
 clean:
-	${MAKE} clean -C ./libft_modified
+	${MAKE} clean -C ./libft
 	rm -rf $(OBJS)
-	@echo $(CLEAN_MESSAGE)
-
+	
 fclean: clean
-	${MAKE} fclean -C ./libft_modified
+	${MAKE} fclean -C ./libft
 	rm -rf $(NAME)
-	@echo $(FCLEAN_MESSAGE)
 
 re: fclean all
 
-			####	Dependencies		####
+################# MAKING MAIN PROGRAM ##################################
+
 $(NAME): $(OBJS)
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(LIBFT)
-	
+	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) -L./libft -lft 
+
+################################# Making LIBFT #########################
 $(LIBFT):
-	${MAKE} -C ./libft_modified
+	${MAKE} --no-print-directory -C ./libft

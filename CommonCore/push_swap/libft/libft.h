@@ -6,7 +6,7 @@
 /*   By: emedeiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 11:02:50 by emedeiro          #+#    #+#             */
-/*   Updated: 2024/02/18 00:16:34 by emedeiro         ###   ########.fr       */
+/*   Updated: 2023/10/26 15:41:17 by emedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@
 # include <string.h>
 # include <unistd.h>
 # include <stdlib.h>
-# include <stdarg.h>
-
 
 typedef struct s_list
 {
@@ -35,7 +33,7 @@ int			ft_isprint(int c);
 int			ft_memcmp(const void *s1, const void *s2, size_t n);
 int			ft_toupper(int c);
 int			ft_tolower(int c);
-long			ft_atol(const char *nptr);
+int			ft_atoi(const char *nptr);
 int			ft_lstsize(t_list *lst);
 int			ft_strncmp(const char *s1, const char *s2, size_t n);
 int			ft_lstsize(t_list *lst);
@@ -71,9 +69,4 @@ size_t		ft_strlen(const char *str);
 t_list		*ft_lstnew(void *content);
 t_list		*ft_lstlast(t_list *lst);
 t_list		*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
-int			ft_printf(const char *format, ...);
-int			ft_print_base(long int s, int n, char p, size_t count);
-int			ft_print_ptr(unsigned long long s, int n, char p, size_t count);
-int			ft_print_char(unsigned char c);
-int			ft_print_str(char *s);
 #endif

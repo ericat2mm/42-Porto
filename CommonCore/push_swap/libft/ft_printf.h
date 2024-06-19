@@ -1,34 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_str.c                                     :+:      :+:    :+:   */
+/*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: emedeiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/17 12:30:18 by emedeiro          #+#    #+#             */
-/*   Updated: 2024/02/18 00:20:09 by emedeiro         ###   ########.fr       */
+/*   Created: 2023/11/17 12:08:02 by emedeiro          #+#    #+#             */
+/*   Updated: 2023/11/23 11:40:04 by emedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef FT_PRINTF_H
+# define FT_PRINTF_H
 
-int	ft_print_str(char *s)
-{
-	int	count;
+# include <stdlib.h>
+# include <stdio.h>
+# include <unistd.h>
+# include <stdarg.h>
 
-	count = 0;
-	if (s == NULL)
-	{
-		ft_print_str("(null)");
-		return (6);
-	}
-	else
-	{
-		while (s[count] != '\0')
-		{
-			ft_print_char(s[count]);
-			count++;
-		}
-	}
-	return (count);
-}
+int	ft_printf(const char *format, ...);
+int	ft_print_base(long int s, int n, char p, size_t count);
+int	ft_print_ptr(unsigned long long s, int n, char p, size_t count);
+int	ft_print_char(unsigned char c);
+int	ft_print_str(char *s);
+
+#endif
