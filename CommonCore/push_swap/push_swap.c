@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emedeiro <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: emedeiro <emedeiro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 10:02:32 by emedeiro          #+#    #+#             */
-/*   Updated: 2024/06/19 19:53:51 by emedeiro         ###   ########.fr       */
+/*   Updated: 2024/06/20 15:41:21 by emedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,12 @@ int main(int argc, char **argv)
     if (argc < 2)
         return (0);
     if (argc == 2)
+    {
         argv = ft_split(argv[1], ' ');
-    initialization_of_stack_a(&a, argv + 1);
+        initialization_of_stack_a(&a, argv, argc);
+    }
+    else
+        initialization_of_stack_a(&a, argv + 1, argc);
     if(!is_sorted(a))
     {
         if (stack_size(a) == 2)

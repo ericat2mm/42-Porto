@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emedeiro <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: emedeiro <emedeiro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 11:40:59 by emedeiro          #+#    #+#             */
-/*   Updated: 2024/06/19 19:49:26 by emedeiro         ###   ########.fr       */
+/*   Updated: 2024/06/20 15:36:00 by emedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ char* check_syntax_errors(char *argv);
 char* duplicates(t_stack_node **a, long number);
 char* free_errors(t_stack_node **a);
 void free_stack(t_stack_node *stack);
+void free_argv(char **argv);
 void set_target_node_b(t_stack_node *a, t_stack_node *b);
 void initialization_node_a(t_stack_node *a, t_stack_node *b);
 void initialization_node_b(t_stack_node *a, t_stack_node *b);
@@ -41,7 +42,7 @@ void current_index(t_stack_node *stack);
 void set_target_node_a(t_stack_node *a, t_stack_node *b);
 void set_cost(t_stack_node *a, t_stack_node *b);
 t_stack_node *set_cheapest(t_stack_node *stack);
-char* initialization_of_stack_a(t_stack_node **a, char **argv);
+char* initialization_of_stack_a(t_stack_node **a, char **argv, int argc);
 int	ft_atol(const char *nptr);
 void append_node(t_stack_node **stack, int n);
 void preparation_for_push(t_stack_node **stack, t_stack_node *node, char stack_name);

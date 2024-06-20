@@ -3,21 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   init_stack_a.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emedeiro <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: emedeiro <emedeiro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 12:08:36 by emedeiro          #+#    #+#             */
-/*   Updated: 2024/06/19 18:57:43 by emedeiro         ###   ########.fr       */
+/*   Updated: 2024/06/20 15:46:47 by emedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-char* initialization_of_stack_a(t_stack_node **a, char **argv)
+char *initialization_of_stack_a(t_stack_node **a, char **argv, int argc)
 {
     int i;
     long number;
 
-    i = 1;
+    i = 0;
     while (argv[i])
     {
         if (check_syntax_errors(argv[i]))
@@ -29,6 +29,11 @@ char* initialization_of_stack_a(t_stack_node **a, char **argv)
             return ("ERROR: DUPLICATE NUMBERS\n");
         append_node(a, number);
         i++;
+    }
+    if (argc == 2)
+    {
+        while (argv)
+            free_argv(argv);
     }
     return (NULL);
 }

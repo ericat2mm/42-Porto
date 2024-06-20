@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_errors.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emedeiro <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: emedeiro <emedeiro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 12:15:00 by emedeiro          #+#    #+#             */
-/*   Updated: 2024/06/19 14:47:40 by emedeiro         ###   ########.fr       */
+/*   Updated: 2024/06/20 15:41:31 by emedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,4 +56,17 @@ void free_stack(t_stack_node *stack)
         stack = stack->next;
         free(temp);
     }
+}
+
+void free_argv(char **argv)
+{
+    int i;
+
+    i = 0;
+    while (argv[i])
+    {
+        free(argv[i]);
+        i++;
+    }
+    free(argv);
 }
