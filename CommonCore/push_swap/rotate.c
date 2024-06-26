@@ -5,43 +5,43 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: emedeiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/19 14:07:24 by emedeiro          #+#    #+#             */
-/*   Updated: 2024/06/19 19:32:51 by emedeiro         ###   ########.fr       */
+/*   Created: 2024/06/23 15:40:28 by emedeiro          #+#    #+#             */
+/*   Updated: 2024/06/23 15:40:51 by emedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void    rotate(t_stack_node **stack)
+void	rotate(t_stack **stack, char leters)
 {
-    t_stack_node *last_node;
+	t_stack	*temp;
+	t_stack	*last;
 
-    if (!*stack || !(*stack)->next)
-        return ;
-    last_node = find_last_node(*stack);
-    last_node->next = *stack;
-    *stack = (*stack)->next;
-    last_node->next->next = NULL;
-    last_node->next->previous = last_node;
-    last_node->next->next = NULL;
+	temp = *stack;
+	last = *stack;
+	while (last->next)
+		last = last->next;
+	last->next = temp;
+	temp->prev = last;
+	*stack = temp->next;
+	temp->next->prev = NULL;
+	temp->next = NULL;
+	if (leters == 'a')
+		ft_printf("ra\n");
+	else if (leters == 'b')
+		ft_printf("rb\n");
+	else
+		(void)leters;
 }
-
-void rotate_a(t_stack_node **a, bool print)
+void	rotate_both(t_stack **stack_a, t_stack **stack_b, char l)
 {
-    rotate(a);
-    if (!print)
-        ft_printf("ra\n");
-}
-void    rotate_b(t_stack_node **b, bool print)
-{
-    rotate(b);
-    if (!print)
-        ft_printf("rb\n");
-}
-void    rr(t_stack_node **a, t_stack_node **b, bool print)
-{
-    rotate(a);
-    rotate(b);
-    if (!print)
-        ft_printf("rr\n");
+	if (*stack_a && *stack_b)
+	{
+		rotate(stack_a, 'n');
+		rotate(stack_b, 'n');
+	}
+	else
+		return ;
+	if (l == 'y')
+		ft_printf("rr\n");
 }

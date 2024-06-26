@@ -5,43 +5,47 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: emedeiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/19 14:07:38 by emedeiro          #+#    #+#             */
-/*   Updated: 2024/06/19 18:41:42 by emedeiro         ###   ########.fr       */
+/*   Created: 2024/06/23 15:41:06 by emedeiro          #+#    #+#             */
+/*   Updated: 2024/06/23 15:41:28 by emedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void reverse_rotate(t_stack_node **stack)
+void	reverse_rotate(t_stack **stack, char leters)
 {
-    t_stack_node *last_node;
+	t_stack	*second_last;
+	t_stack	*last;
 
-    if (!*stack || !(*stack)->next)
-        return ;
-    last_node = find_last_node(*stack);
-    last_node->previous->next = NULL;
-    last_node->next = *stack;
-    last_node->previous = NULL;
-    last_node->next = *stack;
-    *stack = last_node;
-    last_node->next->previous = last_node;
+	second_last = *stack;
+	last = *stack;
+	while (last->next)
+	{
+		second_last = last;
+		last = last->next;
+	}
+	second_last->next = NULL;
+	last->next = (*stack);
+	(*stack)->prev = last;
+	last->prev = NULL;
+	*stack = last;
+	if (leters == 'a')
+		ft_printf("rra\n");
+	else if (leters == 'b')
+		ft_printf("rrb\n");
+	else
+		(void)leters;
 }
-void reverse_rotate_a(t_stack_node **a, bool print)
+void	reverse_rot_both(t_stack **stack_a, t_stack **stack_b, char l)
 {
-    reverse_rotate(a);
-    if (!print)
-        ft_printf("rra\n");
+	if (*stack_a && *stack_b)
+	{
+		reverse_rotate(stack_a, 'n');
+		reverse_rotate(stack_b, 'n');
+	}
+	else
+		return ;
+	if (l == 'y')
+		ft_printf("rrr\n");
 }
-void reverse_rotate_b(t_stack_node **b, bool print)
-{
-    reverse_rotate(b);
-    if (!print)
-        ft_printf("rrb\n");
-}
-void rrr(t_stack_node **a, t_stack_node **b, bool print)
-{
-    reverse_rotate(a);
-    reverse_rotate(b);
-    if (!print)
-        ft_printf("rrr\n");
-}
+

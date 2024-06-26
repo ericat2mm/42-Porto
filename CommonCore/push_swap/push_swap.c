@@ -3,40 +3,73 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emedeiro <emedeiro@student.42.fr>          +#+  +:+       +#+        */
+/*   By: emedeiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/19 10:02:32 by emedeiro          #+#    #+#             */
-/*   Updated: 2024/06/20 15:41:21 by emedeiro         ###   ########.fr       */
+/*   Created: 2024/06/23 15:43:36 by emedeiro          #+#    #+#             */
+/*   Updated: 2024/06/23 15:47:15 by emedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
-    t_stack_node *a;
-    t_stack_node *b;
+	t_stack	*stack_a;
+	t_stack	*stack_b;
 
-    a = NULL;
-    b = NULL;
-    if (argc < 2)
-        return (0);
-    if (argc == 2)
+	stack_a = NULL;
+	if (argc == 1)
+		return (1);
+	else if (!process_args(argc, argv, &stack_a) || argv[1] == NULL)
+	{
+		write(2, "Error\n", 7);
+		return (EXIT_SUCCESS);
+	}
+	if (sorted(&stack_a))
+	{
+		free_stack(stack_a);
+		return (EXIT_SUCCESS);
+	}
+	stack_b = NULL;
+	push_swap(&stack_a, &stack_b);
+	free_stack(stack_a);
+}
+
+void	push_swap(t_stack **stack_a, t_stack **stack_b)
+{
+	if (stacksize(stack_a) == 2)
+		swap_a(stack_a);
+	else if (stacksize(stack_a) == 3)
+		sort_three(stack_a);
+	else if (stacksize(stack_a) <= 5)
+		sort_five(stack_a, stack_b);
+	else
+		big_sort(stack_a, stack_b);
+}
+
+
+int ft_atol(const char *str)
+{
+    int i;
+    int sign;
+    long result;
+
+    i = 0;
+    sign = 1;
+    result = 0;
+    while (str[i] == ' ' || str[i] == '\t' || str[i] == '\n' || str[i] == '\v'
+             || str[i] == '\f' || str[i] == '\r')
+        i++;
+    if (str[i] == '-' || str[i] == '+')
     {
-        argv = ft_split(argv[1], ' ');
-        initialization_of_stack_a(&a, argv, argc);
+        if (str[i] == '-')
+            sign = -1;
+        i++;
     }
-    else
-        initialization_of_stack_a(&a, argv + 1, argc);
-    if(!is_sorted(a))
+    while (str[i] >= '0' && str[i] <= '9')
     {
-        if (stack_size(a) == 2)
-            swap(&a);
-        else if (stack_size(a) == 3)
-            sort_three(&a);
-        else if (stack_size(a) > 3)
-            turkish_algorithm(&a, &b);
+        result = result * 10 + (str[i] - '0');
+        i++;
     }
-    free_stack(a);
-    return (0);
+    return (result * sign);
 }

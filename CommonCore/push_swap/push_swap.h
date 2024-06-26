@@ -3,71 +3,85 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emedeiro <emedeiro@student.42.fr>          +#+  +:+       +#+        */
+/*   By: emedeiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/19 11:40:59 by emedeiro          #+#    #+#             */
-/*   Updated: 2024/06/20 15:36:00 by emedeiro         ###   ########.fr       */
+/*   Created: 2024/06/23 15:30:44 by emedeiro          #+#    #+#             */
+/*   Updated: 2024/06/23 16:11:54 by emedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
+# include <limits.h>
+# include <stdbool.h>
 # include "libft/libft.h"
 # include "libft/ft_printf.h"
-#include <limits.h>
-#include <stdbool.h>
 
-typedef struct s_stack_node
+typedef struct s_stack
 {
-    int	number;
-    int index;
-    int cost;
-    int above_median;
-    int cheapest;
-    struct s_stack_node *target_node;
-    struct s_stack_node *next;
-    struct s_stack_node *previous;
-}               t_stack_node;
+	long int		val;
+	struct s_stack	*next;
+	struct s_stack	*prev;
+}	t_stack;
 
-char* check_syntax_errors(char *argv);
-char* duplicates(t_stack_node **a, long number);
-char* free_errors(t_stack_node **a);
-void free_stack(t_stack_node *stack);
-void free_argv(char **argv);
-void set_target_node_b(t_stack_node *a, t_stack_node *b);
-void initialization_node_a(t_stack_node *a, t_stack_node *b);
-void initialization_node_b(t_stack_node *a, t_stack_node *b);
-void current_index(t_stack_node *stack);
-void set_target_node_a(t_stack_node *a, t_stack_node *b);
-void set_cost(t_stack_node *a, t_stack_node *b);
-t_stack_node *set_cheapest(t_stack_node *stack);
-char* initialization_of_stack_a(t_stack_node **a, char **argv, int argc);
-int	ft_atol(const char *nptr);
-void append_node(t_stack_node **stack, int n);
-void preparation_for_push(t_stack_node **stack, t_stack_node *node, char stack_name);
-void push(t_stack_node **a, t_stack_node **b);
-void pa(t_stack_node **a, t_stack_node **b, bool print);
-void pb(t_stack_node **a, t_stack_node **b, bool print);
-void reverse_rotate(t_stack_node **stack);
-void reverse_rotate_a(t_stack_node **a, bool print);
-void reverse_rotate_b(t_stack_node **a, bool print);
-void rrr(t_stack_node **a, t_stack_node **b, bool print);
-void rotate_a(t_stack_node **a, bool print);
-void rotate_b(t_stack_node **b, bool print);
-void rr(t_stack_node **a, t_stack_node **b, bool print);
-void sort_three(t_stack_node **a);
-void turkish_algorithm(t_stack_node **a, t_stack_node **b);
-void min_on_top(t_stack_node **a);
-t_stack_node *find_min(t_stack_node *stack);
-t_stack_node *find_last_node(t_stack_node *stack);
-bool is_sorted(t_stack_node *stack);
-void move_a_to_b(t_stack_node **a, t_stack_node **b);
-void move_b_to_a(t_stack_node **a, t_stack_node **b);
-void swap(t_stack_node **stack_head);
-void swap_a(t_stack_node **a, bool print);
-void swap_b(t_stack_node **b, bool print);
-void ss(t_stack_node **a, t_stack_node **b, bool print);
-int stack_size(t_stack_node *stack);
-t_stack_node *find_max(t_stack_node *stack);
+
+//ALGORITHM UTILS
+int	stacksize(t_stack **stack);
+bool	sorted(t_stack **stack);
+int	get_bigest(t_stack **stack);
+int	get_lowest(t_stack **stack);
+int	get_position(t_stack **stack, int target);
+
+//ALGORITHM
+void	sort_three(t_stack **stack);
+void	sort_five(t_stack **stack_a, t_stack **stack_b);
+void	big_sort(t_stack **stack_a, t_stack **stack_b);
+void	sort_until_three(t_stack **stack_a, t_stack **stack_b);
+void	back_to_a(t_stack **stack_a, t_stack **stack_b);
+
+//BIG_SORT_UTIlS
+int	get_tar_val_b(t_stack **stack_b, int current);
+int	get_tar_val_a(t_stack **stack_a, int current);
+int	get_cheapest(t_stack **stack_a, t_stack **stack_b);
+int	get_total(t_stack **stack_a, t_stack **stack_b, int val);
+int	targetdist(t_stack **stack, int val);
+
+//INSERT_STACKS
+struct s_stack	*create(char *nums);
+struct s_stack	insert_to_stacks(struct s_stack **head, char **nums);
+void	insert_to_last(struct s_stack *head, char *nums);
+void	free_stack(t_stack *stack);
+
+
+//PUSH_SWAP
+void	push_swap(t_stack **stack_a, t_stack **stack_b);
+int ft_atol(const char *str);
+
+
+//PUSH
+void	push(t_stack **stack_sender, t_stack **stack_receiver, char c);
+
+//REVERSE_ROTATE
+void	reverse_rotate(t_stack **stack, char leters);
+void	reverse_rot_both(t_stack **stack_a, t_stack **stack_b, char l);
+
+
+//ROTATE
+void	rotate(t_stack **stack, char leters);
+void	rotate_both(t_stack **stack_a, t_stack **stack_b, char l);
+
+
+//SWAP
+void	swap(t_stack **stack);
+void	swap_both(t_stack **stack_a, t_stack **stack_b, char l);
+void	swap_a(t_stack **stack_a);
+void	swap_b(t_stack **stack_b);
+
+//VERIFY ARGS
+bool	process_args(int argc, char **argv, t_stack **stack_a);
+int	verify_numbers(char **args);
+int	verify_max(char **args);
+int	verify_dupl(char **args);
+int	verify_args(char **args);
 #endif

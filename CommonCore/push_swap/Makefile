@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: emedeiro <emedeiro@student.42.fr>          +#+  +:+       +#+         #
+#    By: emedeiro <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/19 14:31:06 by emedeiro          #+#    #+#              #
-#    Updated: 2024/06/20 14:45:10 by emedeiro         ###   ########.fr        #
+#    Updated: 2024/06/23 15:47:42 by emedeiro         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,9 +21,8 @@ NAME	= push_swap
 LIBFT		= ./libft/libft.a
 
 	#Sources#
-SRCS =	handle_errors.c init_node_b.c init_node_a.c init_stack_a.c push_swap.c \
-		push.c reverse_rotate.c rotate.c sort_stacks.c stack_utils.c swap.c
-
+SRCS =	algorithm_utils.c algorithm.c big_sort_utils.c insert_stacks.c \
+		push_swap.c push.c reverse_rotate.c rotate.c swap.c verify_args.c
 OBJS = $(SRCS:.c=.o)
 ##################### MAKEFILE RULES ##########################
 
