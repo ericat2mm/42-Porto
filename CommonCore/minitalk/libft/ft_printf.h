@@ -1,32 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minitalk.h                                         :+:      :+:    :+:   */
+/*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: emedeiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/04 22:50:02 by emedeiro          #+#    #+#             */
-/*   Updated: 2024/06/25 18:07:36 by emedeiro         ###   ########.fr       */
+/*   Created: 2023/11/17 12:08:02 by emedeiro          #+#    #+#             */
+/*   Updated: 2023/11/23 11:40:04 by emedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINITALK_H
-# define MINITALK_H
+#ifndef FT_PRINTF_H
+# define FT_PRINTF_H
 
-# include <signal.h>
-# include <unistd.h>
 # include <stdlib.h>
-# include <string.h>
 # include <stdio.h>
-# include "libft/libft.h"
+# include <unistd.h>
+# include <stdarg.h>
 
-//CLIENT
-void send_size(int pid, int size);
-void send_message(int pid, char *str, int len);
+int	ft_printf(const char *format, ...);
+int	ft_print_base(long int s, int n, char p, size_t count);
+int	ft_print_ptr(unsigned long long s, int n, char p, size_t count);
+int	ft_print_char(unsigned char c);
+int	ft_print_str(char *s);
 
-//SERVER
-void	handler_message(int sig);
-void	handler_signal(int sig);
-char	*ft_printf_free(char *str);
-char	*ft_create(int size);
 #endif

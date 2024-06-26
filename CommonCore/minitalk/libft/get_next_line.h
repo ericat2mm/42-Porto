@@ -1,32 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minitalk.h                                         :+:      :+:    :+:   */
+/*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: emedeiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/04 22:50:02 by emedeiro          #+#    #+#             */
-/*   Updated: 2024/06/25 18:07:36 by emedeiro         ###   ########.fr       */
+/*   Created: 2023/12/07 11:42:58 by emedeiro          #+#    #+#             */
+/*   Updated: 2023/12/07 11:43:19 by emedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINITALK_H
-# define MINITALK_H
+#ifndef GET_NEXT_LINE_H
+# define GET_NEXT_LINE_H
 
-# include <signal.h>
-# include <unistd.h>
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 20
+# endif
+
 # include <stdlib.h>
-# include <string.h>
+# include <fcntl.h>
 # include <stdio.h>
-# include "libft/libft.h"
+# include <unistd.h>
 
-//CLIENT
-void send_size(int pid, int size);
-void send_message(int pid, char *str, int len);
+char	*get_next_line(int fd);
+char	*ft_strjoin(char const *s1, char const *s2);
+char	*ft_strchr(const char *string, int searchedChara);
+void	ft_bzero(void *s, size_t n);
+void	*ft_calloc(size_t elementCount, size_t elementSize);
+size_t	ft_strlen(const char *theString);
 
-//SERVER
-void	handler_message(int sig);
-void	handler_signal(int sig);
-char	*ft_printf_free(char *str);
-char	*ft_create(int size);
 #endif

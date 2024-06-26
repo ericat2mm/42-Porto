@@ -5,48 +5,55 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: emedeiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/04 22:56:30 by emedeiro          #+#    #+#             */
-/*   Updated: 2024/06/04 22:58:06 by emedeiro         ###   ########.fr       */
+/*   Created: 2024/06/25 20:21:43 by emedeiro          #+#    #+#             */
+/*   Updated: 2024/06/25 21:09:21 by emedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
+#include "libft/ft_printf.h"
 
-void ft_send_message(int pid, char *message) {
-    int i;
-    int j;
-    int bit;
-
-    i = 0;
-    while (message[i]) {
-        j = 0;
-        while (j < 8) {
-            bit = (message[i] >> (7 - j)) & 1;
-            if (bit == 0) kill(pid, SIGUSR1);
-            else if (bit == 1) kill(pid, SIGUSR2);
-            j++;
-            usleep(100);
-        }
-        i++;
+int main(int argc, char **argv)
+{
+    if (argc != 3)
+    {
+        ft_printf("ERROR\n./client <PID number> <message>\n");
+        return (0);
     }
-    j = 0;
-    while (j < 8) {
-        bit = (message[i] >> (7 - j)) & 1;
-        if (bit == 0) kill(pid, SIGUSR1);
-        else if (bit == 1) kill(pid, SIGUSR2);
-        j++;
+    int pid = ft_atoi(argv[1]);
+    char *str = argv[2];
+    int len = ft_strlen(str);
+    send_size(pid, len);
+    send_message(pid, str, len);
+    return (0);
+}
+
+void send_size(int pid, int size)
+{
+    while (size)
+    {
+        if (size & 1)
+            kill(pid, SIGUSR1);
+        else
+            kill(pid, SIGUSR2);
+        size >>= 1;
         usleep(100);
     }
 }
 
-int main(int argc, char **argv) {
-    int pid;
-
-    if (argc != 3) {
-        ft_putstr_fd("Usage: ./client [PID] [MESSAGE]\n", 1);
-        return (1);
+void send_message(int pid, char *str, int size)
+{
+    while (*str)
+    {
+        while (size)
+        {
+            if (*str & 1)
+                kill(pid, SIGUSR1);
+            else
+                kill(pid, SIGUSR2);
+            *str >>= 1;
+            size--;
+            usleep(100);
+        }
     }
-    pid = ft_atoi(argv[1]);
-    ft_send_message(pid, argv[2]);
-    return (0);
 }

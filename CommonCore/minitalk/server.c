@@ -5,50 +5,85 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: emedeiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/04 22:48:44 by emedeiro          #+#    #+#             */
-/*   Updated: 2024/06/05 16:46:18 by emedeiro         ###   ########.fr       */
+/*   Created: 2024/06/20 16:50:38 by emedeiro          #+#    #+#             */
+/*   Updated: 2024/06/25 20:29:49 by emedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
+#include "libft/ft_printf.h"
 
-//esta função é chamada quando o servidor recebe um sinal do cliente
-//vai ter alocacao de memoria dinamica
-//quero funcoes de 25 linhas no maximo
-
-void ft_receive_message(int sig) {
-    static char message[1024];
-    static int bit = 0;
-    static int i = 0;
-    static int byte = 0;
-    static int msg_index = 0;
-
-    if (sig == SIGUSR1) bit = 0;
-    else if (sig == SIGUSR2) bit = 1;
-
-    byte = (byte << 1) | bit;
-
-    if (++i == 8) {
-        message[msg_index++] = (char)byte;
-        if (byte == '\0' || msg_index >= 1024) {
-            ft_putstr_fd(message, 1);
-            msg_index = 0;
-        }
-        i = 0;
-        byte = 0;
-    }
-}
+static int g_size = 0;
 
 int main(void)
 {
-    int pid;
-
-    pid = getpid();
-    ft_putnbr_fd(pid, 1);
-    ft_putstr_fd("\n", 1);
-    signal(SIGUSR1, ft_receive_message);
-    signal(SIGUSR2, ft_receive_message);
+    ft_printf("Server PID: %d\n", getpid());
+    signal(SIGUSR1, handler_signal);
+    signal(SIGUSR2, handler_signal);
     while (1)
         pause();
     return (0);
+}
+
+void handler_signal(int sig)
+{
+    static int size = 0;
+    static int i = 31;
+
+    if (g_size == 0)
+    {
+        if (sig == SIGUSR1)
+            size |= (1 << i);
+        i--;
+        if (i < 0)
+        {
+            g_size = size;
+            ft_printf("Received size: %d\n", g_size);
+            signal(SIGUSR1, handler_message);
+            signal(SIGUSR2, handler_message);
+        }
+    }
+    else
+        handler_message(sig);
+}
+
+void handler_message(int sig)
+{
+    static char *str = NULL;
+    static int bitcount = 0, j = 0;
+
+    if (!str)
+        str = ft_create(g_size);
+    if (sig == SIGUSR2)
+        str[j] <<= 1;
+    else
+        str[j] = (str[j] << 1) | 1;
+    if (++bitcount == 8)
+    {
+        bitcount = 0;
+        if (++j == g_size)
+        {
+            str[j] = '\0';
+            ft_printf("Received message: %s\n", str);
+            free(str);
+            str = NULL;
+            g_size = 0;
+            signal(SIGUSR1, handler_signal);
+            signal(SIGUSR2, handler_signal);
+        }
+    }
+}
+
+char *ft_create(int size)
+{
+    char *str = (char *)malloc(sizeof(char) * (size + 1));
+    if (!str)
+        return (NULL);
+    return (str);
+}
+char	*ft_printf_free(char *str)
+{
+	ft_printf("Received message: %s\n", str);
+    free(str);
+    return (NULL);
 }

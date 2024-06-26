@@ -1,32 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minitalk.h                                         :+:      :+:    :+:   */
+/*   ft_print_str.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: emedeiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/04 22:50:02 by emedeiro          #+#    #+#             */
-/*   Updated: 2024/06/25 18:07:36 by emedeiro         ###   ########.fr       */
+/*   Created: 2023/11/17 12:30:18 by emedeiro          #+#    #+#             */
+/*   Updated: 2023/11/23 11:35:46 by emedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINITALK_H
-# define MINITALK_H
+#include "ft_printf.h"
 
-# include <signal.h>
-# include <unistd.h>
-# include <stdlib.h>
-# include <string.h>
-# include <stdio.h>
-# include "libft/libft.h"
+int	ft_print_str(char *s)
+{
+	int	count;
 
-//CLIENT
-void send_size(int pid, int size);
-void send_message(int pid, char *str, int len);
-
-//SERVER
-void	handler_message(int sig);
-void	handler_signal(int sig);
-char	*ft_printf_free(char *str);
-char	*ft_create(int size);
-#endif
+	count = 0;
+	if (s == NULL)
+	{
+		ft_print_str("(null)");
+		return (6);
+	}
+	else
+	{
+		while (s[count] != '\0')
+		{
+			ft_print_char(s[count]);
+			count++;
+		}
+	}
+	return (count);
+}
