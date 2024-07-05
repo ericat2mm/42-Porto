@@ -3,24 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   algorithm_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emedeiro <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: emedeiro <emedeiro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/23 15:32:27 by emedeiro          #+#    #+#             */
-/*   Updated: 2024/06/23 16:11:40 by emedeiro         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
-#include "push_swap.h"
-
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   algorithm_utils.c                                  :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: pedronplay <pedronplay@student.42.fr>      +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/19 18:15:55 by pedronplay        #+#    #+#             */
-/*   Updated: 2024/03/02 18:16:13 by pedronplay       ###   ########.fr       */
+/*   Updated: 2024/06/28 02:44:15 by emedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +43,7 @@ bool	sorted(t_stack **stack)
 	return (1);
 }
 
-int	get_bigest(t_stack **stack)
+long	get_bigest(t_stack **stack)
 {
 	int		max;
 	t_stack	*temp;
@@ -73,7 +59,7 @@ int	get_bigest(t_stack **stack)
 	return (max);
 }
 
-int	get_lowest(t_stack **stack)
+long	get_lowest(t_stack **stack)
 {
 	int		min;
 	t_stack	*temp;

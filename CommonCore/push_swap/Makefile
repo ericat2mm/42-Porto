@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: emedeiro <marvin@42.fr>                    +#+  +:+       +#+         #
+#    By: emedeiro <emedeiro@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/19 14:31:06 by emedeiro          #+#    #+#              #
-#    Updated: 2024/06/23 15:47:42 by emedeiro         ###   ########.fr        #
+#    Updated: 2024/06/27 14:52:13 by emedeiro         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,4 +45,4 @@ $(NAME): $(OBJS)
 
 ################################# Making LIBFT #########################
 $(LIBFT):
-	${MAKE} --no-print-directory -C ./libft
+	${MAKE} -C ./libft

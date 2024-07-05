@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   algorithm.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emedeiro <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: emedeiro <emedeiro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/23 15:33:28 by emedeiro          #+#    #+#             */
-/*   Updated: 2024/06/23 15:35:25 by emedeiro         ###   ########.fr       */
+/*   Updated: 2024/06/28 02:44:34 by emedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,13 +62,6 @@ void	big_sort(t_stack **stack_a, t_stack **stack_b)
 	sort_until_three(stack_a, stack_b);
 	sort_three(stack_a);
 	back_to_a(stack_a, stack_b);
-	while (!sorted(stack_a))
-	{
-		if (0 > targetdist(stack_a, get_lowest(stack_a)))
-			reverse_rotate(stack_a, 'a');
-		else
-			rotate(stack_a, 'a');
-	}
 }
 
 void	sort_until_three(t_stack **stack_a, t_stack **stack_b)
@@ -106,11 +99,11 @@ void	back_to_a(t_stack **stack_a, t_stack **stack_b)
 
 	while (*stack_b)
 	{
+		cheap = get_cheapest(stack_b, stack_a);
 		if (get_tar_val_a(stack_a, (*stack_b)->val) == (*stack_a)->val)
 			push(stack_b, stack_a, 'a');
 		else
 		{
-			cheap = get_cheapest(stack_b, stack_a);
 			if (targetdist(stack_b, cheap) < 0
 				&& targetdist(stack_a, get_tar_val_a(stack_a, cheap)) < 0)
 				reverse_rot_both(stack_b, stack_a, 'y');

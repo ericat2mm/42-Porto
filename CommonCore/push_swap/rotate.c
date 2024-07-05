@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rotate.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emedeiro <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: emedeiro <emedeiro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/23 15:40:28 by emedeiro          #+#    #+#             */
-/*   Updated: 2024/06/23 15:40:51 by emedeiro         ###   ########.fr       */
+/*   Updated: 2024/06/28 02:37:46 by emedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void	rotate(t_stack **stack, char leters)
 	else
 		(void)leters;
 }
+
 void	rotate_both(t_stack **stack_a, t_stack **stack_b, char l)
 {
 	if (*stack_a && *stack_b)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   reverse_rotate.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emedeiro <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: emedeiro <emedeiro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/23 15:41:06 by emedeiro          #+#    #+#             */
-/*   Updated: 2024/06/23 15:41:28 by emedeiro         ###   ########.fr       */
+/*   Updated: 2024/06/28 02:37:58 by emedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ void	reverse_rotate(t_stack **stack, char leters)
 	else
 		(void)leters;
 }
+
 void	reverse_rot_both(t_stack **stack_a, t_stack **stack_b, char l)
 {
 	if (*stack_a && *stack_b)
@@ -48,4 +49,3 @@ void	reverse_rot_both(t_stack **stack_a, t_stack **stack_b, char l)
 	if (l == 'y')
 		ft_printf("rrr\n");
 }
-

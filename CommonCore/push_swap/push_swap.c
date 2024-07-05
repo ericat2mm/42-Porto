@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emedeiro <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: emedeiro <emedeiro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/23 15:43:36 by emedeiro          #+#    #+#             */
-/*   Updated: 2024/06/23 15:47:15 by emedeiro         ###   ########.fr       */
+/*   Updated: 2024/06/28 03:33:51 by emedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,16 +22,22 @@ int	main(int argc, char **argv)
 		return (1);
 	else if (!process_args(argc, argv, &stack_a) || argv[1] == NULL)
 	{
-		write(2, "Error\n", 7);
-		return (EXIT_SUCCESS);
+		return (write(2, "Error\n", 7), EXIT_SUCCESS);
 	}
 	if (sorted(&stack_a))
 	{
-		free_stack(stack_a);
-		return (EXIT_SUCCESS);
+		return (free_stack(stack_a), EXIT_SUCCESS);
 	}
 	stack_b = NULL;
 	push_swap(&stack_a, &stack_b);
+	while (sorted(&stack_a) != true)
+	{
+		if (stacksize(&stack_a) / 2
+			>= get_position(&stack_a, get_cheapest_to_final(&stack_a)))
+			rotate(&stack_a, 'a');
+		else
+			reverse_rotate(&stack_a, 'a');
+	}
 	free_stack(stack_a);
 }
 
@@ -47,29 +53,53 @@ void	push_swap(t_stack **stack_a, t_stack **stack_b)
 		big_sort(stack_a, stack_b);
 }
 
-
-int ft_atol(const char *str)
+int	ft_atol(const char *str)
 {
-    int i;
-    int sign;
-    long result;
+	int		i;
+	int		sign;
+	long	result;
 
-    i = 0;
-    sign = 1;
-    result = 0;
-    while (str[i] == ' ' || str[i] == '\t' || str[i] == '\n' || str[i] == '\v'
-             || str[i] == '\f' || str[i] == '\r')
-        i++;
-    if (str[i] == '-' || str[i] == '+')
-    {
-        if (str[i] == '-')
-            sign = -1;
-        i++;
-    }
-    while (str[i] >= '0' && str[i] <= '9')
-    {
-        result = result * 10 + (str[i] - '0');
-        i++;
-    }
-    return (result * sign);
+	i = 0;
+	sign = 1;
+	result = 0;
+	while (str[i] == ' ' || str[i] == '\t' || str[i] == '\n' || str[i] == '\v'
+		|| str[i] == '\f' || str[i] == '\r')
+		i++;
+	if (str[i] == '-' || str[i] == '+')
+	{
+		if (str[i] == '-')
+			sign = -1;
+		i++;
+	}
+	while (str[i] >= '0' && str[i] <= '9')
+	{
+		result = result * 10 + (str[i] - '0');
+		i++;
+	}
+	return (result * sign);
+}
+
+int	get_cheapest_to_final(t_stack **stack_a)
+{
+	int		cheapest;
+	int		moves;
+	int		cost;
+	t_stack	*temp;
+
+	temp = *stack_a;
+	cheapest = temp->val;
+	cost = INT_MAX;
+	while (temp)
+	{
+		moves = targetdist(stack_a, temp->val);
+		if (cost > moves)
+		{
+			cheapest = temp->val;
+			cost = moves;
+		}
+		if (moves <= 1)
+			return (cheapest);
+		temp = temp->next;
+	}
+	return (cheapest);
 }

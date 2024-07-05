@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   big_sort_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emedeiro <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: emedeiro <emedeiro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/23 15:33:59 by emedeiro          #+#    #+#             */
-/*   Updated: 2024/06/23 15:35:21 by emedeiro         ###   ########.fr       */
+/*   Updated: 2024/06/28 02:53:47 by emedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	get_tar_val_b(t_stack **stack_b, int current)
 	return (target);
 }
 
-int	get_tar_val_a(t_stack **stack_a, int current)
+long	get_tar_val_a(t_stack **stack_a, int current)
 {
 	t_stack	*head;
 	int		target;
