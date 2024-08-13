@@ -5,53 +5,54 @@
 #                                                     +:+ +:+         +:+      #
 #    By: emedeiro <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/06/13 20:16:11 by emedeiro          #+#    #+#              #
-#    Updated: 2024/06/14 17:36:36 by emedeiro         ###   ########.fr        #
+#    Created: 2024/07/06 16:10:18 by emedeiro          #+#    #+#              #
+#    Updated: 2024/08/13 11:29:51 by emedeiro         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-	#Compiling Variables#
-CC		 = cc
-CFLAGS	 = -g -Wall -Wextra -Werror
-MLX_FLAGS = -lXext -lX11 -lm
+GREEN = \033[0;32m
+RED = \033[0;31m
+BLUE = \033[0;34m
+RESET = \033[0m
 
-	#Names#
-NAME	= fdf
+###NAME AND LIBRARIES###
+NAME = fdf
+LIBX = ./minilibx_macos/libmlx.a
+LIBFT = ./libft/libft.a
 
-##################### MAKEFILE VARIABLES ###############################
-LIBFT		= libft/libft.a
-MLX			= minilibx_macos/libmlx.a
+####FLAGS####
+CC = gcc
+CFLAGS = -Wall -Wextra -Werror
+MINILIBX = -L ./minilibx_macos -lmlx -lXext -lX11 -l
 
-##################### MAKEFILE SOURCES #################################
-SRCS =	fdf.c file_manipulation.c map_manipulation.c matrix_manipulation.c \
-		point_manipulation.c
+##SOURCE FILES##
+SRCS = 	fdf.c draw_manipulation.c init_manipulation.c key_manipulation.c \
+			render_manipulation.c free_manipulation.c read_manipulation.c
 
-##################### MAKEFILE OBJS ####################################
+##OBJECT FILES##
 OBJS = $(SRCS:.c=.o)
 
-##################### MAKEFILE RULES ###################################
+all: $(LIBFT) $(LIBX) $(NAME)
 
-all: $(LIBFT) $(MLX) $(NAME)
+$(NAME): $(OBJS)
+	@$(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(MINILIBX) -o $(NAME)
+	@echo "$(GREEN)$(NAME) compiled$(RESET)"
+
+$(LIBFT):
+	@make -C ./libft
+
+$(LIBX):
+	@make -C ./minilibx_macos
 
 clean:
-	${MAKE} clean -C ./libft
-	${MAKE} clean -C ./minilibx_macos
-	rm -rf $(OBJS)
-	
+	@rm -f $(OBJS)
+	@make clean -C ./libft
+	@make clean -C ./minilibx_macos
+	@echo "$(RED)Objects removed$(RESET)"
+
 fclean: clean
-	${MAKE} fclean -C ./libft
-	rm -rf $(NAME)
+	@rm -f $(NAME)
+	@make fclean -C ./libft
+	@echo "$(RED)$(NAME) removed$(RESET)"
 
 re: fclean all
-
-################# MAKING MAIN PROGRAM ##################################
-$(NAME): $(OBJS)
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) -L./libft -lft -L./minilibx_macos -lmlx $(MLX_FLAGS)
-
-################################# Making LIBFT #########################
-$(LIBFT):
-	${MAKE} -C ./libft
-
-################################# Making MLX ###########################
-$(MLX):
-	${MAKE} -C ./minilibx_macos
