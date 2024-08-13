@@ -6,7 +6,7 @@
 /*   By: emedeiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 22:40:38 by emedeiro          #+#    #+#             */
-/*   Updated: 2024/08/13 11:27:00 by emedeiro         ###   ########.fr       */
+/*   Updated: 2024/08/13 15:32:55 by emedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,6 @@ typedef struct  s_map
     int zoom;
 }   t_map;
 
-typedef struct s_fdf
-{
-    void    *mlx;
-    void    *win;
-    t_map   *map; // pointer to the map struct
-}   t_fdf;
-
 typedef struct  s_point
 {
     int x;
@@ -51,6 +44,16 @@ typedef struct  s_image
     int     bpp;
     int     endian;
 }   t_image;
+
+typedef struct s_fdf
+{
+    void    *mlx;
+    void    *win;
+    t_map   *map; // pointer to the map struct
+    t_image *img;
+    int     zoom;
+    int   view;
+}   t_fdf;
 
 //MAIN
 int check_args(int argc, char **argv);
@@ -78,6 +81,7 @@ char    *read_map(char *file, t_map *map);
 
 //RENDER_MANIPULATION.C
 void    render(t_fdf *fdf);
+void    background(t_image *img, int color);
 
 
 

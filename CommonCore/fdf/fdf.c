@@ -6,7 +6,7 @@
 /*   By: emedeiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 16:56:34 by emedeiro          #+#    #+#             */
-/*   Updated: 2024/08/13 11:05:15 by emedeiro         ###   ########.fr       */
+/*   Updated: 2024/08/13 12:18:17 by emedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,19 +22,10 @@ int main (int argc, char **argv)
         return (1);
     map = init_map();
     read = read_map(argv[1], map);
-    if (!read)
+    if (!(read))
         return (1);
     fdf = init_fdf(map);
-    //render map
     render(fdf);
-    //tecla para fechar a janela
-    mlx_key_hook(fdf->win, key_hook, fdf);
-    //mouse para rotacionar o mapa
-    mlx_mouse_hook(fdf->win, mouse_hook, fdf);
-    //loop para manter a janela aberta
-    mlx_loop(fdf->mlx);
-    free_map(map);
-    free_fdf(fdf);
     return (0);
 }
 
