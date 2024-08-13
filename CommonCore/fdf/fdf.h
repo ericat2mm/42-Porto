@@ -6,8 +6,8 @@
 #include "minilibx_macos/mlx.h"
 #include <math.h>
 
-#define WIN_WIDTH 1920 //because it's the resolution of my screen
-#define WIN_HEIGHT 1080
+#define WIN_WIDTH 2560 //because it's the resolution of my screen
+#define WIN_HEIGHT 1600
 
 // Forward declaration
 typedef struct s_map t_map;
@@ -22,14 +22,6 @@ typedef struct s_point
     t_map *map;
 } t_point;
 
-typedef struct s_map
-{
-    t_point **matrix;
-    int width;
-    int height;
-    int zoom;
-} t_map;
-
 typedef struct s_image
 {
     void    *img;
@@ -37,6 +29,7 @@ typedef struct s_image
     int     size_l;
     int     bpp;
     int     endian;
+    char    *addr;
 } t_image;
 
 typedef struct s_fdf
@@ -46,7 +39,25 @@ typedef struct s_fdf
     t_map   *map;
     t_image *img;
     int     view;
+    void   *mlx_connect;
+    void   *mlx_win;
 } t_fdf;
+
+typedef struct s_map
+{
+    t_point **matrix;
+    int width;
+    int height;
+    int zoom;
+} t_map;
+typedef struct s_mlx
+{
+	void	*mlx_connect;
+	void	*mlx_win;
+	t_map	*map;
+	t_image	img;
+    t_fdf   *win;
+}	t_mlx;
 
 //BRESENHAM_UTILS.C
 float step_one(float *x_a, float *x_b);
@@ -93,7 +104,7 @@ void    point(t_point *point, char *coords, int x, int y);
 char    *read_map(char *file, t_map *map);
 
 //RENDER_MANIPULATION.C
-void    render(t_fdf *fdf);
+void    render(t_map *map);
 void    background(t_image *img, int color);
-
+void   set_up_win(t_mlx *win);
 #endif

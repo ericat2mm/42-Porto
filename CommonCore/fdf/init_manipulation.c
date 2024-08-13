@@ -5,18 +5,16 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: emedeiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/09 22:55:59 by emedeiro          #+#    #+#             */
-/*   Updated: 2024/08/09 22:59:43 by emedeiro         ###   ########.fr       */
+/*   Created: 2024/08/13 23:02:38 by emedeiro          #+#    #+#             */
+/*   Updated: 2024/08/13 23:31:57 by emedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-t_map   *init_map(void)
+t_map *init_map(void)
 {
-    t_map   *map;
-
-    map = (t_map *)malloc(sizeof(t_map));
+    t_map *map = (t_map *)malloc(sizeof(t_map));
     if (!map)
         return (NULL);
     map->matrix = NULL;
@@ -24,11 +22,10 @@ t_map   *init_map(void)
     map->height = 0;
     return (map);
 }
-t_fdf   *init_fdf(t_map *map)
-{
-    t_fdf   *fdf;
 
-    fdf = (t_fdf *)malloc(sizeof(t_fdf));
+t_fdf *init_fdf(t_map *map)
+{
+    t_fdf *fdf = (t_fdf *)malloc(sizeof(t_fdf));
     if (!fdf)
         return (NULL);
     fdf->mlx = mlx_init();

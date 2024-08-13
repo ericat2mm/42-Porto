@@ -6,7 +6,7 @@
 /*   By: emedeiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 12:20:02 by emedeiro          #+#    #+#             */
-/*   Updated: 2024/08/13 20:20:02 by emedeiro         ###   ########.fr       */
+/*   Updated: 2024/08/13 23:31:20 by emedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,29 +15,20 @@
 t_map   *ft_data(char *file)
 {
     t_map   *map;
-    char    *line;
-    int     fd;
-	int		x;
-	int		y;
+    int     x = 0;
+    int     y = 0;
 
-    dimensions(&x, &y, file);
-    if (!(map = malloc(sizeof(t_map))) 
-		|| !(map->matrix = malloc(y * sizeof(t_point *))))
+    if (dimensions(&x, &y, file) == -1)
         return (NULL);
-    map->height = y;
+    map = (t_map *)malloc(sizeof(t_map));
+    if (!map)
+        return (NULL);
     map->width = x;
-    if ((fd = open(file, O_RDONLY)) < 0)
+    map->height = y;
+    map->matrix = (t_point **)malloc(sizeof(t_point *) * y);
+    if (!map->matrix || !read_map(file, map))
         return (NULL);
-    y = 0;
-    while ((line = get_next_line(fd)))
-    {
-        if (!(map->matrix[y] = malloc(x * sizeof(t_point))))
-            return (NULL);
-        matrix(map->matrix[y], line, y); 
-        free(line);
-        y++;
-    }
-    close(fd);
     return (map);
 }
+
 

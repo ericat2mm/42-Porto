@@ -6,13 +6,12 @@
 /*   By: emedeiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 23:03:41 by emedeiro          #+#    #+#             */
-/*   Updated: 2024/08/13 11:10:53 by emedeiro         ###   ########.fr       */
+/*   Updated: 2024/08/14 00:10:40 by emedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-//função que fecha a janela ao apertar a tecla esc
 int key_hook(int keycode, t_fdf *fdf)
 {
     if (keycode == 53)
@@ -23,19 +22,20 @@ int key_hook(int keycode, t_fdf *fdf)
     }
     return (0);
 }
-//função que aumenta ou diminui o zoom ao rolar o mouse
 int mouse_hook(int button, t_fdf *fdf)
 {
-    if (button == 4)
-    {
+    t_map *map;
+    
+    map = fdf->map;
+    if (button == 'w') //scroll up
         fdf->map->zoom += 1;
-        render(fdf);
-    }
-    else if (button == 5)
-    {
+    else if (button == 's') //scroll down
         fdf->map->zoom -= 1;
-        render(fdf);
-    }
+    else if (button == 'a') //scroll left
+        fdf->map->zoom += 1;
+    else if (button == 'd') //scroll right
+        fdf->map->zoom -= 1;
+    render(map);
     return (0);
 }
 

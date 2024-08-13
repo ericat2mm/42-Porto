@@ -6,7 +6,7 @@
 #    By: emedeiro <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/06 16:10:18 by emedeiro          #+#    #+#              #
-#    Updated: 2024/08/13 20:42:27 by emedeiro         ###   ########.fr        #
+#    Updated: 2024/08/13 23:50:24 by emedeiro         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,8 @@ LIBFT = ./libft/libft.a
 #### FLAGS ####
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
-MINILIBX = -L ./minilibx_macos -lmlx -framework OpenGL -framework AppKit -lm
+MINILIBX = -L ./minilibx_macos -lmlx -framework OpenGL -framework AppKit
+
 
 ## SOURCE FILES ##
 SRCS = 	bresenham_utils.c data_manipulation.c dimensions.c draw_manipulation.c \

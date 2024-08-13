@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   point_manipulation.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emedeiro <emedeiro@student.42.fr>          +#+  +:+       +#+        */
+/*   By: emedeiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 14:14:26 by emedeiro          #+#    #+#             */
-/*   Updated: 2024/08/13 18:47:16 by emedeiro         ###   ########.fr       */
+/*   Updated: 2024/08/13 23:32:27 by emedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,19 @@
 void    point(t_point *point, char *coords, int x, int y)
 {
     char    **data;
-
+    int     i;
+    
     data = ft_split(coords, ',');
     if (!data)
         return ;
     point->z = ft_atoi(data[0]);
     point->x = x;
     point->y = y;
-    // Liberando memória usada pelo ft_split
-    int i;
     i = 0;
-    while (data[i])
-        free(data[i++]);
+    while (data[i] != NULL)
+    {
+        free(data[i]);
+        i++;
+    }
     free(data);
 }

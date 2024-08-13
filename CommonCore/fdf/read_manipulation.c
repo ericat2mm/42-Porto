@@ -6,7 +6,7 @@
 /*   By: emedeiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 10:57:34 by emedeiro          #+#    #+#             */
-/*   Updated: 2024/08/13 20:38:55 by emedeiro         ###   ########.fr       */
+/*   Updated: 2024/08/13 23:50:41 by emedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,27 +16,23 @@ char    *read_map(char *file, t_map *map)
 {
     int     fd;
     char    *line;
-    char    **split_line;
-    int     i;
-    int     j;
-    t_point new_point;
+    int     y;
 
-    line = NULL;
     fd = open(file, O_RDONLY);
-    map->matrix = (t_point **)malloc(sizeof(int *) * map->height);
-    i = 0;
-    while (get_next_line(fd) != NULL)
+    if (fd == -1)
+        return (NULL);
+    y = 0;
+    line = get_next_line(fd);
+    while (line != NULL)
     {
-        map->matrix[i] = (t_point *)malloc(sizeof(int) * map->width);
-        split_line = ft_split(line, ' ');
-        j = 0;
-        while (j < map->width)
-        {
-            new_point.value = ft_atoi(split_line[j]);
-            map->matrix[i][j] = new_point;
-            j++;
-        }
-        i++;
+        map->matrix[y] = (t_point *)malloc(sizeof(t_point) * map->width);
+        if (!map->matrix[y])
+            return (NULL);
+        matrix(map->matrix[y], line, y);
+        free(line);
+        y++;
+        line = get_next_line(fd);
     }
-    return (line);
+    close(fd);
+    return (line); 
 }
