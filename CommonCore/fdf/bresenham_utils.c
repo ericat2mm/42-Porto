@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bresenham_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emedeiro <emedeiro@student.42.fr>          +#+  +:+       +#+        */
+/*   By: emedeiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 14:55:08 by emedeiro          #+#    #+#             */
-/*   Updated: 2024/08/13 17:18:53 by emedeiro         ###   ########.fr       */
+/*   Updated: 2024/08/13 20:43:50 by emedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,12 @@ float step_one_two(float *y_a, float *y_b)
     return (delta_y);
 }
 
-//step two of the bresenham algorithm
-//Pb = Δy/Bigger
-//Pa = Δx/Bigger
-
 float step_two(float dx, float dy, float max)
 {    
-    max = fabs(dx), fabs(dy);
+    if (dx > dy)
+        max = dx;
+    else
+        max = dy;
     return (max);
 }
 float step_two_two(float dx, float max)

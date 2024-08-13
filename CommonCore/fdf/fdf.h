@@ -1,59 +1,52 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   fdf.h                                              :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: emedeiro <emedeiro@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/09 22:40:38 by emedeiro          #+#    #+#             */
-/*   Updated: 2024/08/13 18:57:38 by emedeiro         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
+#ifndef FDF_H
+# define FDF_H
 
 #include "libft/libft.h"
 #include "libft/get_next_line.h"
-#include "minilibx-linux/mlx.h"
+#include "minilibx_macos/mlx.h"
 #include <math.h>
-
 
 #define WIN_WIDTH 1920 //because it's the resolution of my screen
 #define WIN_HEIGHT 1080
 
+// Forward declaration
+typedef struct s_map t_map;
 
-typedef struct  s_map
-{
-    int **matrix;
-    int width;
-    int height;
-    int zoom;
-}   t_map;
-
-typedef struct  s_point
+typedef struct s_point
 {
     int x;
     int y;
     int z;
     int color;
-    t_map   *map;
-}   t_point;
+    int value;
+    t_map *map;
+} t_point;
 
-typedef struct  s_image
+typedef struct s_map
+{
+    t_point **matrix;
+    int width;
+    int height;
+    int zoom;
+} t_map;
+
+typedef struct s_image
 {
     void    *img;
     char    *data;
     int     size_l;
     int     bpp;
     int     endian;
-}   t_image;
+} t_image;
 
 typedef struct s_fdf
 {
     void    *mlx;
     void    *win;
-    t_map   *map; // pointer to the map struct
+    t_map   *map;
     t_image *img;
     int     view;
-}   t_fdf;
+} t_fdf;
 
 //BRESENHAM_UTILS.C
 float step_one(float *x_a, float *x_b);
@@ -73,6 +66,7 @@ int count_words(char *s, char c);
 int draw(t_fdf *win);
 void    bresenham_algorithm(float x_a, float y_a, float x_b, float y_b, t_fdf *win);
 void isometric(float *x, float *y, float z);
+void apply_isometric(t_fdf *win, float *x_a, float *y_a, float *x_b, float *y_b);
 
 //MAIN
 int check_args(int argc, char **argv);
@@ -102,6 +96,4 @@ char    *read_map(char *file, t_map *map);
 void    render(t_fdf *fdf);
 void    background(t_image *img, int color);
 
-
-
-
+#endif

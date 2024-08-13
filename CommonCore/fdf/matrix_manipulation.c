@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   matrix_manipulation.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emedeiro <emedeiro@student.42.fr>          +#+  +:+       +#+        */
+/*   By: emedeiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 14:03:39 by emedeiro          #+#    #+#             */
-/*   Updated: 2024/08/13 18:47:39 by emedeiro         ###   ########.fr       */
+/*   Updated: 2024/08/13 20:21:28 by emedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void    matrix(t_point *row, char *line, int y)
         return ;
     while (data[x])
     {
-        point(row, data[x], x, y); 
+        point(&row[x], data[x], x, y); 
         x++;
     }
     free(data);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_manipulation.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emedeiro <emedeiro@student.42.fr>          +#+  +:+       +#+        */
+/*   By: emedeiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 10:57:34 by emedeiro          #+#    #+#             */
-/*   Updated: 2024/08/13 11:48:53 by emedeiro         ###   ########.fr       */
+/*   Updated: 2024/08/13 20:38:55 by emedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,22 +19,24 @@ char    *read_map(char *file, t_map *map)
     char    **split_line;
     int     i;
     int     j;
+    t_point new_point;
 
     line = NULL;
     fd = open(file, O_RDONLY);
-    map->matrix = (int **)malloc(sizeof(int *) * map->height);
+    map->matrix = (t_point **)malloc(sizeof(int *) * map->height);
     i = 0;
     while (get_next_line(fd) != NULL)
     {
-        map->matrix[i] = (int *)malloc(sizeof(int) * map->width);
+        map->matrix[i] = (t_point *)malloc(sizeof(int) * map->width);
         split_line = ft_split(line, ' ');
         j = 0;
         while (j < map->width)
         {
-            map->matrix[i][j] = ft_atoi(split_line[j]);
+            new_point.value = ft_atoi(split_line[j]);
+            map->matrix[i][j] = new_point;
             j++;
         }
         i++;
     }
     return (line);
-}   
+}
