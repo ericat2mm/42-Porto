@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_manipulation.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emedeiro <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: emedeiro <emedeiro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 23:01:25 by emedeiro          #+#    #+#             */
-/*   Updated: 2024/08/13 14:37:06 by emedeiro         ###   ########.fr       */
+/*   Updated: 2024/08/13 18:37:20 by emedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,22 @@
 
 void    render(t_fdf *fdf)
 {
-    int x;
-    int y;
+    int i;
+    int j;
 
-    y = 0;
-    while (y < fdf->map->height)
+    i = 0;
+    while (i < fdf->map->height)
     {
-        x = 0;
-        while (x < fdf->map->width)
+        j = 0;
+        while (j < fdf->map->width)
         {
-            if (x < fdf->map->width - 1)
-                draw_line(x, y, x + 1, y, fdf);
-            if (y < fdf->map->height - 1)
-                draw_line(x, y, x, y + 1, fdf);
-            x++;
+            if (j < fdf->map->width - 1)
+                draw(fdf->win);
+            if (i < fdf->map->height - 1)
+                draw(fdf->win);
+            j++;
         }
-        y++;
+        i++;
     }
 }
 void    background(t_image *img, int color)
@@ -43,3 +43,4 @@ void    background(t_image *img, int color)
         i++;
     }
 }
+

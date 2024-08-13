@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emedeiro <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: emedeiro <emedeiro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/07 11:42:08 by emedeiro          #+#    #+#             */
-/*   Updated: 2023/12/07 11:42:26 by emedeiro         ###   ########.fr       */
+/*   Updated: 2024/08/13 11:51:17 by emedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,14 +76,4 @@ void	*ft_calloc(size_t elementCount, size_t elementSize)
 		return (NULL);
 	ft_bzero(res, elementSize * elementCount);
 	return (res);
-}
-
-size_t	ft_strlen(const char *theString)
-{
-	int	i;
-
-	i = 0;
-	while (theString[i])
-		i++;
-	return (i);
 }

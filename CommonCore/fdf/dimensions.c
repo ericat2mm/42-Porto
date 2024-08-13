@@ -3,21 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   dimensions.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emedeiro <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: emedeiro <emedeiro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/13 14:30:51 by emedeiro          #+#    #+#             */
-/*   Updated: 2024/08/13 14:31:04 by emedeiro         ###   ########.fr       */
+/*   Created: 2024/08/13 12:51:00 by emedeiro          #+#    #+#             */
+/*   Updated: 2024/08/13 18:15:40 by emedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-int	ft_get_dimensions(int *x, int *y, char *filename)
+int dimensions(int *x, int *y, char *file)
 {
-    int fd;
-    char *line;
+    int     fd;
+    char    *line;
 
-    fd = open(filename, O_RDONLY);
+    fd = open(file, O_RDONLY);
     if (fd == -1)
         return (-1);
     while (get_next_line(fd))
@@ -26,10 +26,31 @@ int	ft_get_dimensions(int *x, int *y, char *filename)
         if (*y == 1)
         {
             line = ft_strdup(line);
-            *x = ft_count_words(line, ' ');
+            *x = count_words(line, ' ');
             free(line);
         }
     }
     close(fd);
     return (0);
+}
+
+int count_words(char *s, char c)
+{
+    int i;
+    int count;
+
+    i = 0;
+    count = 0;
+    while (s[i])
+    {
+        if (s[i] != c)
+        {
+            count++;
+            while (s[i] && s[i] != c)
+                i++;
+        }
+        if (s[i])
+            i++;
+    }
+    return (count);
 }

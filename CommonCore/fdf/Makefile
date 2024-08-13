@@ -3,30 +3,33 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: emedeiro <marvin@42.fr>                    +#+  +:+       +#+         #
+#    By: emedeiro <emedeiro@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/06 16:10:18 by emedeiro          #+#    #+#              #
-#    Updated: 2024/08/13 12:10:04 by emedeiro         ###   ########.fr        #
+#    Updated: 2024/08/13 18:50:06 by emedeiro         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 GREEN = \033[0;32m
 RED = \033[0;31m
+BLUE = \033[0;34m
 RESET = \033[0m
 
 ###NAME AND LIBRARIES###
 NAME = fdf
-LIBX = ./minilibx_macos/libmlx.a
+LIBX = ./minilibx-linux/libmlx.a
 LIBFT = ./libft/libft.a
 
 ####FLAGS####
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
-MINILIBX = -L ./minilibx_macos -lmlx -lXext -lX11 -l
+MINILIBX = -L ./minilibx-linux -lmlx -Ilmlx -lXext -lX11 -lbsd -lm -no-pie
 
 ##SOURCE FILES##
-SRCS = 	fdf.c draw_manipulation.c init_manipulation.c key_manipulation.c \
-			render_manipulation.c free_manipulation.c read_manipulation.c
+SRCS = 	bresenham_utils.c data_manipulation.c dimensions.c draw_manipulation.c \
+		fdf.c free_manipulation.c init_manipulation.c key_manipulation.c \
+		matrix_manipulation.c point_manipulation.c read_manipulation.c \
+		render_manipulation.c
 
 ##OBJECT FILES##
 OBJS = $(SRCS:.c=.o)
@@ -41,12 +44,12 @@ $(LIBFT):
 	@make -C ./libft
 
 $(LIBX):
-	@make -C ./minilibx_macos
+	@make -C ./minilibx-linux
 
 clean:
 	@rm -f $(OBJS)
 	@make clean -C ./libft
-	@make clean -C ./minilibx_macos
+	@make clean -C ./minilibx-linux
 	@echo "$(RED)Objects removed$(RESET)"
 
 fclean: clean

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emedeiro <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: emedeiro <emedeiro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 22:40:38 by emedeiro          #+#    #+#             */
-/*   Updated: 2024/08/13 15:32:55 by emedeiro         ###   ########.fr       */
+/*   Updated: 2024/08/13 18:57:38 by emedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft/libft.h"
 #include "libft/get_next_line.h"
-#include "minilibx_macos/mlx.h"
+#include "minilibx-linux/mlx.h"
 #include <math.h>
 
 
@@ -34,6 +34,7 @@ typedef struct  s_point
     int y;
     int z;
     int color;
+    t_map   *map;
 }   t_point;
 
 typedef struct  s_image
@@ -51,18 +52,30 @@ typedef struct s_fdf
     void    *win;
     t_map   *map; // pointer to the map struct
     t_image *img;
-    int     zoom;
-    int   view;
+    int     view;
 }   t_fdf;
+
+//BRESENHAM_UTILS.C
+float step_one(float *x_a, float *x_b);
+float step_one_two(float *y_a, float *y_b);
+float step_two(float dx, float dy, float max);
+float step_two_two(float dx, float max);
+float step_two_three(float dy, float max);
+
+//DATA_MANIPULATION.C
+t_map   *ft_data(char *file);
+
+//DIMENSINS.C
+int dimensions(int *x, int *y, char *file);
+int count_words(char *s, char c);
+
+//DRAW_MANIPULATION.C
+int draw(t_fdf *win);
+void    bresenham_algorithm(float x_a, float y_a, float x_b, float y_b, t_fdf *win);
+void isometric(float *x, float *y, float z);
 
 //MAIN
 int check_args(int argc, char **argv);
-char	*read_file(int fd, char *res);
-
-//DRAW_MANIPULATION.C
-void draw_line(int x_a, int y_a, int x_b, int y_b, t_fdf *fdf);
-void draw_line_low(int x_a, int y_a, int x_b, t_fdf *fdf, int delta_x, int delta_y);
-void draw_line_high(int x_a, int y_a, int y_b, t_fdf *fdf, int delta_x, int delta_y);
 
 //FREE_MANIPULATION.C
 void    free_map(t_map *map);
@@ -75,6 +88,12 @@ t_fdf   *init_fdf(t_map *map);
 //KEY_MANIPULATION.C
 int key_hook(int keycode, t_fdf *fdf);
 int mouse_hook(int button, t_fdf *fdf);
+
+//MATRIX_MANIPULATION.C
+void    matrix(t_point *row, char *line, int y);
+
+//POINT_MANIPULATION.C
+void    point(t_point *point, char *coords, int x, int y);
 
 //READ_MANIPULATION.C
 char    *read_map(char *file, t_map *map);

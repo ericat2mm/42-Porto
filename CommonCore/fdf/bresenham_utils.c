@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bresenham_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emedeiro <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: emedeiro <emedeiro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 14:55:08 by emedeiro          #+#    #+#             */
-/*   Updated: 2024/08/13 15:15:12 by emedeiro         ###   ########.fr       */
+/*   Updated: 2024/08/13 17:18:53 by emedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,27 +16,42 @@
 //delta_x = x_b - x_a
 //delta_y = y_b - y_a
 
-float step_one(int *x_a, int *y_a, int *x_b, int *y_b)
+float step_one(float *x_a, float *x_b)
 {
     float delta_x;
-    float delta_y;
 
     delta_x = *x_b - *x_a;
+    return (delta_x);
+}
+
+float step_one_two(float *y_a, float *y_b)
+{
+    float delta_y;
+
     delta_y = *y_b - *y_a;
-    return (delta_x, delta_y);
+    return (delta_y);
 }
 
 //step two of the bresenham algorithm
 //Pb = Δy/Bigger
 //Pa = Δx/Bigger
 
-int step_two(float dx, float dy, int max)
+float step_two(float dx, float dy, float max)
+{    
+    max = fabs(dx), fabs(dy);
+    return (max);
+}
+float step_two_two(float dx, float max)
 {
     float Pa;
+    
+    Pa = dx / max;
+    return (Pa);
+}
+float step_two_three(float dy, float max)
+{
     float Pb;
     
-    max = ft_abs(dx), ft_abs(dy);
-    Pa = dx / max;
     Pb = dy / max;
-    return (max, Pa, Pb);
+    return (Pb);
 }
