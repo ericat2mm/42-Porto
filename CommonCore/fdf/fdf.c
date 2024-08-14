@@ -6,7 +6,7 @@
 /*   By: emedeiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 23:01:50 by emedeiro          #+#    #+#             */
-/*   Updated: 2024/08/14 00:08:34 by emedeiro         ###   ########.fr       */
+/*   Updated: 2024/08/14 07:57:53 by emedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,7 @@ int main(int argc, char **argv)
         free_map(map);
         return (1);
     }
-    render(map);
-    mlx_loop(fdf->mlx);
+    render(fdf);
     return (0);
 }
 
@@ -37,13 +36,13 @@ int check_args(int argc, char **argv)
 {
     if (argc != 2)
     {
-        ft_putstr_fd("usage: fdf input_file\n", 2);
-        return (0);
+        perror("Usage: ./fdf <filename>");
+        exit(EXIT_FAILURE);
     }
     if (!ft_strnstr(argv[1], ".fdf", ft_strlen(argv[1])))
     {
-        ft_putstr_fd("Invalid file\n", 2);
-        return (0);
+        perror("Invalid file extension. Please use a .fdf file.");
+        exit(EXIT_FAILURE);
     }
     return (1);
 }

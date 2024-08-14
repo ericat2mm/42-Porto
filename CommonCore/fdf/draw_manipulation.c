@@ -6,7 +6,7 @@
 /*   By: emedeiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 14:32:39 by emedeiro          #+#    #+#             */
-/*   Updated: 2024/08/13 23:29:37 by emedeiro         ###   ########.fr       */
+/*   Updated: 2024/08/14 07:59:43 by emedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ int draw(t_fdf *win)
         y++;
     }
     mlx_put_image_to_window(win->mlx, win->win, win->img->img, 0, 0);
+    screen_settings(win);
     return (0);
 }
 void bresenham_algorithm(float x_a, float y_a, float x_b, float y_b, t_fdf *win)

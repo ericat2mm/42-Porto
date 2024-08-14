@@ -41,6 +41,7 @@ typedef struct s_fdf
     int     view;
     void   *mlx_connect;
     void   *mlx_win;
+    int     data;
 } t_fdf;
 
 typedef struct s_map
@@ -49,6 +50,13 @@ typedef struct s_map
     int width;
     int height;
     int zoom;
+    int z_divisor;
+    int z_range;
+    int x_offset;
+    int y_offset;
+    int view;
+    int     alpha;
+    int     beta;
 } t_map;
 typedef struct s_mlx
 {
@@ -85,6 +93,7 @@ int check_args(int argc, char **argv);
 //FREE_MANIPULATION.C
 void    free_map(t_map *map);
 void   free_fdf(t_fdf *fdf);
+void    exit_free(t_fdf *fdf);
 
 //INIT_MANIPULATION.C
 t_map   *init_map(void);
@@ -92,7 +101,7 @@ t_fdf   *init_fdf(t_map *map);
 
 //KEY_MANIPULATION.C
 int key_hook(int keycode, t_fdf *fdf);
-int mouse_hook(int button, t_fdf *fdf);
+int     exit_hook(t_fdf *fdf);
 
 //MATRIX_MANIPULATION.C
 void    matrix(t_point *row, char *line, int y);
@@ -104,7 +113,9 @@ void    point(t_point *point, char *coords, int x, int y);
 char    *read_map(char *file, t_map *map);
 
 //RENDER_MANIPULATION.C
-void    render(t_map *map);
+void render(t_fdf *fdf);
 void    background(t_image *img, int color);
-void   set_up_win(t_mlx *win);
+
+//SCREEN_SETTINGS.C
+void    screen_settings(t_fdf *win);
 #endif

@@ -6,7 +6,7 @@
 #    By: emedeiro <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/06 16:10:18 by emedeiro          #+#    #+#              #
-#    Updated: 2024/08/13 23:50:24 by emedeiro         ###   ########.fr        #
+#    Updated: 2024/08/14 08:00:18 by emedeiro         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,7 @@ MINILIBX = -L ./minilibx_macos -lmlx -framework OpenGL -framework AppKit
 SRCS = 	bresenham_utils.c data_manipulation.c dimensions.c draw_manipulation.c \
 		fdf.c free_manipulation.c init_manipulation.c key_manipulation.c \
 		matrix_manipulation.c point_manipulation.c read_manipulation.c \
-		render_manipulation.c
+		render_manipulation.c screen_manipulation.c
 
 ## OBJECT FILES ##
 OBJS = $(SRCS:.c=.o)

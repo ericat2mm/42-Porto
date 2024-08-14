@@ -1,37 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_manipulation.c                                :+:      :+:    :+:   */
+/*   screen_manipulation.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: emedeiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/13 23:02:18 by emedeiro          #+#    #+#             */
-/*   Updated: 2024/08/14 07:42:40 by emedeiro         ###   ########.fr       */
+/*   Created: 2024/08/14 07:45:21 by emedeiro          #+#    #+#             */
+/*   Updated: 2024/08/14 07:53:39 by emedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void free_map(t_map *map)
+void    screen_settings(t_fdf *win)
 {
-    int i = 0;
-
-    while (i < map->height)
-    {
-        free(map->matrix[i]);
-        i++;
-    }
-    free(map->matrix);
-    free(map);
-}
-
-void free_fdf(t_fdf *fdf)
-{
-    free_map(fdf->map);
-    free(fdf);
-}
-void    exit_free(t_fdf *fdf)
-{
-    free_fdf(fdf);
-    exit(EXIT_FAILURE);
+    mlx_string_put(win->mlx, win->win, 10, 10, 0xFFFFFF, "Zoom: + -");
+    mlx_string_put(win->mlx, win->win, 10, 30, 0xFFFFFF, "Move: Arrows");
+    mlx_string_put(win->mlx, win->win, 10, 90, 0xFFFFFF, "Exit: ESC");
+    mlx_string_put(win->mlx, win->win, 10, 110, 0xFFFFFF, "Page Up: 5 3");
 }
