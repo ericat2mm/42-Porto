@@ -6,13 +6,13 @@
 /*   By: emedeiro <emedeiro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/07 11:42:08 by emedeiro          #+#    #+#             */
-/*   Updated: 2024/08/13 11:51:17 by emedeiro         ###   ########.fr       */
+/*   Updated: 2024/08/14 12:38:57 by emedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin_get(char const *s1, char const *s2)
 {
 	int		sizetotal;
 	char	*res;
@@ -20,7 +20,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	int		j;
 
 	i = 0;
-	sizetotal = ft_strlen(s1) + ft_strlen(s2);
+	sizetotal = ft_strlen_get(s1) + ft_strlen_get(s2);
 	res = malloc(sizeof(char) * (sizetotal + 1));
 	if (!res || !s1 || !s2)
 		return (NULL);
@@ -40,7 +40,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	return (res);
 }
 
-char	*ft_strchr(const char *string, int searchedChar )
+char	*ft_strchr_get(const char *string, int searchedChar )
 {
 	char	*str;
 
@@ -53,7 +53,7 @@ char	*ft_strchr(const char *string, int searchedChar )
 		return (NULL);
 }
 
-void	ft_bzero(void *s, size_t n)
+void	ft_bzero_get(void *s, size_t n)
 {
 	char	*str;
 	size_t	i;
@@ -67,13 +67,23 @@ void	ft_bzero(void *s, size_t n)
 	}
 }
 
-void	*ft_calloc(size_t elementCount, size_t elementSize)
+void	*ft_calloc_get(size_t elementCount, size_t elementSize)
 {
 	char	*res;
 
 	res = malloc(elementSize * elementCount);
 	if (!res)
 		return (NULL);
-	ft_bzero(res, elementSize * elementCount);
+	ft_bzero_get(res, elementSize * elementCount);
 	return (res);
+}
+
+size_t	ft_strlen_get(const char *theString)
+{
+	int	i;
+
+	i = 0;
+	while (theString[i])
+		i++;
+	return (i);
 }

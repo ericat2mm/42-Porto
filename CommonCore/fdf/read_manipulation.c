@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_manipulation.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emedeiro <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: emedeiro <emedeiro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 10:57:34 by emedeiro          #+#    #+#             */
-/*   Updated: 2024/08/13 23:50:41 by emedeiro         ###   ########.fr       */
+/*   Updated: 2024/08/14 13:51:11 by emedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,7 @@ char    *read_map(char *file, t_map *map)
     if (fd == -1)
         return (NULL);
     y = 0;
-    line = get_next_line(fd);
-    while (line != NULL)
+    while ((line = get_next_line(fd)) != NULL)
     {
         map->matrix[y] = (t_point *)malloc(sizeof(t_point) * map->width);
         if (!map->matrix[y])
@@ -31,8 +30,7 @@ char    *read_map(char *file, t_map *map)
         matrix(map->matrix[y], line, y);
         free(line);
         y++;
-        line = get_next_line(fd);
     }
     close(fd);
-    return (line); 
+    return ("SUCCESS"); 
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bresenham_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emedeiro <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: emedeiro <emedeiro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 14:55:08 by emedeiro          #+#    #+#             */
-/*   Updated: 2024/08/13 20:43:50 by emedeiro         ###   ########.fr       */
+/*   Updated: 2024/08/14 18:01:35 by emedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,19 +16,19 @@
 //delta_x = x_b - x_a
 //delta_y = y_b - y_a
 
-float step_one(float *x_a, float *x_b)
+float step_one(t_point *p1, t_point *p2)
 {
     float delta_x;
-
-    delta_x = *x_b - *x_a;
+    
+    delta_x = p2->x - p1->x;
     return (delta_x);
 }
 
-float step_one_two(float *y_a, float *y_b)
+float step_one_two(t_point *p1, t_point *p2)
 {
     float delta_y;
 
-    delta_y = *y_b - *y_a;
+    delta_y = p2->y - p1->y;
     return (delta_y);
 }
 

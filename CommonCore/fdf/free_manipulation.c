@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_manipulation.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emedeiro <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: emedeiro <emedeiro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 23:02:18 by emedeiro          #+#    #+#             */
-/*   Updated: 2024/08/14 07:42:40 by emedeiro         ###   ########.fr       */
+/*   Updated: 2024/08/14 12:27:03 by emedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,4 +34,13 @@ void    exit_free(t_fdf *fdf)
 {
     free_fdf(fdf);
     exit(EXIT_FAILURE);
+}
+
+char	*ft_free_res(char *buffer, char *buf)
+{
+	char	*temp;
+
+	temp = ft_strjoin(buffer, buf);
+	free(buffer);
+	return (temp);
 }

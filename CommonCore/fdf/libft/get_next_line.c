@@ -6,7 +6,7 @@
 /*   By: emedeiro <emedeiro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/07 11:41:23 by emedeiro          #+#    #+#             */
-/*   Updated: 2024/08/13 12:56:42 by emedeiro         ###   ########.fr       */
+/*   Updated: 2024/08/14 12:39:44 by emedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ char	*ft_free(char *buffer, char *buf)
 {
 	char	*temp;
 
-	temp = ft_strjoin(buffer, buf);
+	temp = ft_strjoin_get(buffer, buf);
 	free(buffer);
 	return (temp);
 }
@@ -35,7 +35,7 @@ char	*ft_next(char *buffer)
 		free(buffer);
 		return (NULL);
 	}
-	line = ft_calloc((ft_strlen(buffer) - i + 1), sizeof(char));
+	line = ft_calloc_get((ft_strlen_get(buffer) - i + 1), sizeof(char));
 	i++;
 	j = 0;
 	while (buffer[i])
@@ -54,7 +54,7 @@ char	*ft_line(char *buffer)
 		return (NULL);
 	while (buffer[i] && buffer[i] != '\n')
 		i++;
-	line = ft_calloc(i + 2, sizeof(char));
+	line = ft_calloc_get(i + 2, sizeof(char));
 	i = 0;
 	while (buffer[i] && buffer[i] != '\n')
 	{
@@ -72,8 +72,8 @@ char	*read_file(int fd, char *res)
 	int		byte_read;
 
 	if (!res)
-		res = ft_calloc(1, 1);
-	buffer = ft_calloc(BUFFER_SIZE + 1, sizeof(char));
+		res = ft_calloc_get(1, 1);
+	buffer = ft_calloc_get(BUFFER_SIZE + 1, sizeof(char));
 	byte_read = 1;
 	while (byte_read > 0)
 	{
@@ -86,7 +86,7 @@ char	*read_file(int fd, char *res)
 		}
 		buffer[byte_read] = 0;
 		res = ft_free(res, buffer);
-		if (ft_strchr(buffer, '\n'))
+		if (ft_strchr_get(buffer, '\n'))
 			break ;
 	}
 	free(buffer);

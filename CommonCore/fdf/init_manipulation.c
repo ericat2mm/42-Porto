@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_manipulation.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emedeiro <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: emedeiro <emedeiro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 23:02:38 by emedeiro          #+#    #+#             */
-/*   Updated: 2024/08/13 23:31:57 by emedeiro         ###   ########.fr       */
+/*   Updated: 2024/08/14 16:38:30 by emedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,9 @@ t_map *init_map(void)
 
 t_fdf *init_fdf(t_map *map)
 {
-    t_fdf *fdf = (t_fdf *)malloc(sizeof(t_fdf));
+    t_fdf *fdf;
+    
+    fdf = (t_fdf *)malloc(sizeof(t_fdf));
     if (!fdf)
         return (NULL);
     fdf->mlx = mlx_init();

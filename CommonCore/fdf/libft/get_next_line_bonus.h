@@ -6,7 +6,7 @@
 /*   By: emedeiro <emedeiro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/07 11:44:35 by emedeiro          #+#    #+#             */
-/*   Updated: 2024/08/13 11:51:53 by emedeiro         ###   ########.fr       */
+/*   Updated: 2024/08/14 12:41:45 by emedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,10 @@
 # include <unistd.h>
 
 char	*get_next_line(int fd);
-char	*ft_strjoin(char const *s1, char const *s2);
-char	*ft_strchr(const char *string, int searchedChara);
-void	ft_bzero(void *s, size_t n);
-void	*ft_calloc(size_t elementCount, size_t elementSize);
+char	*ft_strjoin_get(char const *s1, char const *s2);
+char	*ft_strchr_get(const char *string, int searchedChara);
+void	ft_bzero_get(void *s, size_t n);
+void	*ft_calloc_get(size_t elementCount, size_t elementSize);
+size_t	ft_strlen_get(const char *theString);
 
 #endif

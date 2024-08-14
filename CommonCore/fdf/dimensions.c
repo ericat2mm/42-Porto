@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dimensions.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emedeiro <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: emedeiro <emedeiro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 23:01:10 by emedeiro          #+#    #+#             */
-/*   Updated: 2024/08/13 23:31:11 by emedeiro         ###   ########.fr       */
+/*   Updated: 2024/08/14 11:01:57 by emedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ int dimensions(int *x, int *y, char *file)
     fd = open(file, O_RDONLY);
     if (fd == -1)
         return (-1);
-
     while ((line = get_next_line(fd)) != NULL)
     {
         (*y)++;
@@ -39,18 +38,18 @@ int dimensions(int *x, int *y, char *file)
 
 int count_words(char *s, char c)
 {
-    int i = 0;
-    int count = 0;
+    int i;
+    int words;
 
-    while (s[i] != '\0')
-    {
-        while (s[i] == c && s[i] != '\0')
-            i++;
-        if (s[i] != c && s[i] != '\0')
-            count++;
-        while (s[i] != c && s[i] != '\0')
-            i++;
-        i++;
-    }
-    return (count);
+    i = 0;
+	words = 0;
+	while (s[i])
+	{
+		if (s[i] != c)
+			words++;
+		while (s[i] != c && s[i + 1])
+			i++;
+		i++;
+	}
+	return (words);
 }

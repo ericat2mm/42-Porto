@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emedeiro <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: emedeiro <emedeiro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 23:01:50 by emedeiro          #+#    #+#             */
-/*   Updated: 2024/08/14 07:57:53 by emedeiro         ###   ########.fr       */
+/*   Updated: 2024/08/14 14:43:17 by emedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,9 @@ int main(int argc, char **argv)
         free_map(map);
         return (1);
     }
+    print_map(fdf);
     render(fdf);
+    
     return (0);
 }
 
@@ -45,4 +47,23 @@ int check_args(int argc, char **argv)
         exit(EXIT_FAILURE);
     }
     return (1);
+}
+
+void	print_map(t_fdf *fdf)
+{
+	int i;
+    int j;
+    
+    i = 0;
+    while (i < fdf->map->height)
+    {
+        j = 0;
+        while (j < fdf->map->width)
+        {
+            printf(" %d ", fdf->map->matrix[i][j].z);
+            j++;
+        }
+        printf("\n");
+        i++;
+    }
 }

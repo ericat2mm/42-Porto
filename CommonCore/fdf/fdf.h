@@ -3,13 +3,12 @@
 
 #include "libft/libft.h"
 #include "libft/get_next_line.h"
-#include "minilibx_macos/mlx.h"
+#include "minilibx-linux/mlx.h"
 #include <math.h>
 
-#define WIN_WIDTH 2560 //because it's the resolution of my screen
-#define WIN_HEIGHT 1600
+#define WIN_WIDTH 1024 //because it's the resolution of my screen
+#define WIN_HEIGHT 1024
 
-// Forward declaration
 typedef struct s_map t_map;
 
 typedef struct s_point
@@ -37,7 +36,7 @@ typedef struct s_fdf
     void    *mlx;
     void    *win;
     t_map   *map;
-    t_image *img;
+    t_image img;
     int     view;
     void   *mlx_connect;
     void   *mlx_win;
@@ -58,6 +57,8 @@ typedef struct s_map
     int     alpha;
     int     beta;
 } t_map;
+
+
 typedef struct s_mlx
 {
 	void	*mlx_connect;
@@ -68,8 +69,8 @@ typedef struct s_mlx
 }	t_mlx;
 
 //BRESENHAM_UTILS.C
-float step_one(float *x_a, float *x_b);
-float step_one_two(float *y_a, float *y_b);
+float step_one(t_point *point_1, t_point *point_2);
+float step_one_two(t_point *point_1, t_point *point_2);
 float step_two(float dx, float dy, float max);
 float step_two_two(float dx, float max);
 float step_two_three(float dy, float max);
@@ -83,12 +84,13 @@ int count_words(char *s, char c);
 
 //DRAW_MANIPULATION.C
 int draw(t_fdf *win);
-void    bresenham_algorithm(float x_a, float y_a, float x_b, float y_b, t_fdf *win);
+void bresenham_algorithm(t_point *point_1, t_point *point_2, t_fdf *win);
 void isometric(float *x, float *y, float z);
-void apply_isometric(t_fdf *win, float *x_a, float *y_a, float *x_b, float *y_b);
+void apply_isometric(t_point *point_1, t_point *point_2, t_fdf *win);
 
 //MAIN
 int check_args(int argc, char **argv);
+void	print_map(t_fdf *fdf);
 
 //FREE_MANIPULATION.C
 void    free_map(t_map *map);
@@ -100,7 +102,7 @@ t_map   *init_map(void);
 t_fdf   *init_fdf(t_map *map);
 
 //KEY_MANIPULATION.C
-int key_hook(int keycode, t_fdf *fdf);
+//int key_hook(int keycode, t_fdf *fdf);
 int     exit_hook(t_fdf *fdf);
 
 //MATRIX_MANIPULATION.C
@@ -111,10 +113,10 @@ void    point(t_point *point, char *coords, int x, int y);
 
 //READ_MANIPULATION.C
 char    *read_map(char *file, t_map *map);
-
 //RENDER_MANIPULATION.C
 void render(t_fdf *fdf);
 void    background(t_image *img, int color);
+void	img_pix_put(t_image *img, int x, int y, int color);
 
 //SCREEN_SETTINGS.C
 void    screen_settings(t_fdf *win);

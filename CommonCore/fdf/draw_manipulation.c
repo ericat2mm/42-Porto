@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_manipulation.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emedeiro <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: emedeiro <emedeiro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 14:32:39 by emedeiro          #+#    #+#             */
-/*   Updated: 2024/08/14 07:59:43 by emedeiro         ###   ########.fr       */
+/*   Updated: 2024/08/14 18:14:47 by emedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ int draw(t_fdf *win)
     int x;
     int y;
 
-    background(win->img, 0x000000);
     y = 0;
     while (y < win->map->height)
     {
@@ -25,18 +24,19 @@ int draw(t_fdf *win)
         while (x < win->map->width)
         {
             if (x < win->map->width - 1)
-                bresenham_algorithm(x, y, x + 1, y, win);
+                bresenham_algorithm(&(win->map->matrix[y][x]), &(win->map->matrix[y][x + 1]), win);
             if (y < win->map->height - 1)
-                bresenham_algorithm(x, y, x, y + 1, win);
+                bresenham_algorithm(&(win->map->matrix[y][x]), &(win->map->matrix[y + 1][x]), win);
             x++;
         }
         y++;
     }
-    mlx_put_image_to_window(win->mlx, win->win, win->img->img, 0, 0);
+    mlx_put_image_to_window(win->mlx, win->win, win->img.img, 0, 0);
     screen_settings(win);
     return (0);
 }
-void bresenham_algorithm(float x_a, float y_a, float x_b, float y_b, t_fdf *win)
+
+void bresenham_algorithm(t_point *point_1, t_point *point_2, t_fdf *win)
 {
     float x;
     float y;
@@ -47,29 +47,29 @@ void bresenham_algorithm(float x_a, float y_a, float x_b, float y_b, t_fdf *win)
     int Pb;
 
     max = 0;
-    apply_isometric(win, &x_a, &y_a, &x_b, &y_b);
-    dx = step_one(&x_a, &x_b);
-    dy = step_one_two(&y_a, &y_b);
+    apply_isometric(point_1, point_2, win);
+    dx = step_one(point_1, point_2);
+    dy = step_one_two(point_1, point_2);
     max = step_two(dx, dy, max);
     Pa = step_two_two(dx, max);
     Pb = step_two_three(dy, max);
-    x = x_a;
-    y = y_a;
-    while ((int)(x - x_b) || (int)(y - y_b))
+    x = point_1->x;
+    y = point_1->y;
+    while ((int)(x - point_2->x) || (int)(y - point_2->y))
     {
-        mlx_pixel_put(win->mlx, win->win, x, y, 0xFFFFFF);
+        mlx_pixel_put(&win->img, win->img.img, x, y, 0xFFFFFF);
         x += Pa;
         y += Pb;
     }
 }
 
-void apply_isometric(t_fdf *win, float *x_a, float *y_a, float *x_b, float *y_b)
+void apply_isometric(t_point *point_1, t_point *point_2, t_fdf *win)
 {
     if (win->view != 3)
     {
         // Aplicando a transformação isométrica
-        isometric(x_a, y_a, win->map->matrix[(int)*y_a][(int)*x_a].z);
-        isometric(x_b, y_b, win->map->matrix[(int)*y_b][(int)*x_a].z);
+        isometric(point_1->x, point_1->y, win->map->matrix[(int)(point_1->y)][(int)(point_1->x)].z);
+        isometric(point_2->x, point_2->y, win->map->matrix[(int)(point_2->y)][(int)(point_2->x)].z);
     }
 }
 
