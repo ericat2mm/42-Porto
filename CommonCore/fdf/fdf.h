@@ -3,7 +3,7 @@
 
 #include "libft/libft.h"
 #include "libft/get_next_line.h"
-#include "minilibx-linux/mlx.h"
+#include "minilibx_macos/mlx.h"
 #include <math.h>
 
 #define WIN_WIDTH 1024 //because it's the resolution of my screen
@@ -13,8 +13,8 @@ typedef struct s_map t_map;
 
 typedef struct s_point
 {
-    int x;
-    int y;
+    float x;
+    float y;
     int z;
     int color;
     int value;
@@ -37,7 +37,7 @@ typedef struct s_fdf
     void    *win;
     t_map   *map;
     t_image img;
-    int     view;
+    double     view;
     void   *mlx_connect;
     void   *mlx_win;
     int     data;
@@ -46,27 +46,14 @@ typedef struct s_fdf
 typedef struct s_map
 {
     t_point **matrix;
+    t_fdf   *fdf;
     int width;
     int height;
-    int zoom;
-    int z_divisor;
-    int z_range;
     int x_offset;
     int y_offset;
-    int view;
     int     alpha;
     int     beta;
 } t_map;
-
-
-typedef struct s_mlx
-{
-	void	*mlx_connect;
-	void	*mlx_win;
-	t_map	*map;
-	t_image	img;
-    t_fdf   *win;
-}	t_mlx;
 
 //BRESENHAM_UTILS.C
 float step_one(t_point *point_1, t_point *point_2);
@@ -85,7 +72,7 @@ int count_words(char *s, char c);
 //DRAW_MANIPULATION.C
 int draw(t_fdf *win);
 void bresenham_algorithm(t_point *point_1, t_point *point_2, t_fdf *win);
-void isometric(float *x, float *y, float z);
+void isometric(float *x, float *y, int z);
 void apply_isometric(t_point *point_1, t_point *point_2, t_fdf *win);
 
 //MAIN

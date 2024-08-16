@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_manipulation.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emedeiro <emedeiro@student.42.fr>          +#+  +:+       +#+        */
+/*   By: emedeiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 23:01:25 by emedeiro          #+#    #+#             */
-/*   Updated: 2024/08/14 17:09:20 by emedeiro         ###   ########.fr       */
+/*   Updated: 2024/08/15 14:23:31 by emedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,16 @@
 
 void    background(t_image *img, int color)
 {
-	int	i;
-    int	j;
+	int	y;
+    int	x;
 
-    i = 0;
-    while (i < WIN_HEIGHT)
+    y = 0;
+    while (y < WIN_HEIGHT)
     {
-        j = 0;
-        while (j < WIN_WIDTH)
-        {
-            img_pix_put(img, j, i, color);
-            j++;
-        }
-        ++i;
+        x = 0;
+        while (x < WIN_WIDTH)
+            img_pix_put(img, x++, y, color);
+        ++y;
     }
     printf("DESENHEI");
 }
@@ -43,6 +40,7 @@ void render(t_fdf *fdf)
     fdf->img.img = mlx_new_image(fdf->mlx, WIN_WIDTH, WIN_HEIGHT);
     fdf->img.addr = mlx_get_data_addr(fdf->img.img, &fdf->img.bpp, &fdf->img.size_l, &fdf->img.endian);
     background(&fdf->img, 0x000000); // Pinta o fundo de preto
+    set_window(fdf);
     if (draw(fdf) == -1)
     {
         free_fdf(fdf);

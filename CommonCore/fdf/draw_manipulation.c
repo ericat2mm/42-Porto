@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_manipulation.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emedeiro <emedeiro@student.42.fr>          +#+  +:+       +#+        */
+/*   By: emedeiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 14:32:39 by emedeiro          #+#    #+#             */
-/*   Updated: 2024/08/14 18:14:47 by emedeiro         ###   ########.fr       */
+/*   Updated: 2024/08/15 13:25:42 by emedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,24 +57,20 @@ void bresenham_algorithm(t_point *point_1, t_point *point_2, t_fdf *win)
     y = point_1->y;
     while ((int)(x - point_2->x) || (int)(y - point_2->y))
     {
-        mlx_pixel_put(&win->img, win->img.img, x, y, 0xFFFFFF);
+        img_pix_put(&win->img, x, y, 0xFFFFFF);
         x += Pa;
         y += Pb;
     }
 }
-
 void apply_isometric(t_point *point_1, t_point *point_2, t_fdf *win)
 {
     if (win->view != 3)
     {
-        // Aplicando a transformação isométrica
-        isometric(point_1->x, point_1->y, win->map->matrix[(int)(point_1->y)][(int)(point_1->x)].z);
-        isometric(point_2->x, point_2->y, win->map->matrix[(int)(point_2->y)][(int)(point_2->x)].z);
+        isometric(&(point_1->x), &(point_1->y), win->map->matrix[(int)(point_1->y)][(int)(point_1->x)].z);
+        isometric(&(point_2->x), &(point_2->y), win->map->matrix[(int)(point_2->y)][(int)(point_2->x)].z);
     }
 }
-
-
-void isometric(float *x, float *y, float z)
+void isometric(float *x, float *y, int z)
 {
     float previous_x;
     float previous_y;
@@ -84,3 +80,4 @@ void isometric(float *x, float *y, float z)
     *x = (previous_x - previous_y) * cos(0.523599);
     *y = -z + (previous_x + previous_y) * sin(0.523599);
 }
+

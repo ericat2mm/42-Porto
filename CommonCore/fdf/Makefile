@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: emedeiro <emedeiro@student.42.fr>          +#+  +:+       +#+         #
+#    By: emedeiro <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/06 16:10:18 by emedeiro          #+#    #+#              #
-#    Updated: 2024/08/14 09:57:44 by emedeiro         ###   ########.fr        #
+#    Updated: 2024/08/15 13:27:13 by emedeiro         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,14 +17,13 @@ RESET = \033[0m
 
 ### NAME AND LIBRARIES ###
 NAME = fdf
-LIBX = ./minilibx-linux/libmlx.a
+LIBX = ./minilibx_macos/libmlx.a
 LIBFT = ./libft/libft.a
 
 #### FLAGS ####
-CC = gcc
-CFLAGS = -Wall -Wextra -Werror -g
-MINILIBX = -L ./minilibx-linux -lmlx -Ilmlx -lXext -lX11 -lbsd -lm -no-pie
-
+CC = gcc -g
+CFLAGS = -Wall -Wextra -Werror 
+MINILIBX =  -L./minilibx_macos -lmlx -framework OpenGL -framework AppKit
 ## SOURCE FILES ##
 SRCS = 	bresenham_utils.c data_manipulation.c dimensions.c draw_manipulation.c \
 		fdf.c free_manipulation.c init_manipulation.c key_manipulation.c \
@@ -44,12 +43,12 @@ $(LIBFT):
 	@make -C ./libft
 
 $(LIBX):
-	@make -C ./minilibx-linux
+	@make -C ./minilibx_macos
 
 clean:
 	@rm -f $(OBJS)
 	@make clean -C ./libft
-	@make clean -C ./minilibx-linux
+	@make clean -C ./minilibx_macos
 	@echo "$(RED)Objects removed$(RESET)"
 
 fclean: clean

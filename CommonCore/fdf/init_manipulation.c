@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_manipulation.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emedeiro <emedeiro@student.42.fr>          +#+  +:+       +#+        */
+/*   By: emedeiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 23:02:38 by emedeiro          #+#    #+#             */
-/*   Updated: 2024/08/14 16:38:30 by emedeiro         ###   ########.fr       */
+/*   Updated: 2024/08/15 14:30:57 by emedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,4 +34,13 @@ t_fdf *init_fdf(t_map *map)
     fdf->win = mlx_new_window(fdf->mlx, WIN_WIDTH, WIN_HEIGHT, "FDF");
     fdf->map = map;
     return (fdf);
+}
+void    set_window(t_fdf *fdf)
+{
+    fdf->mlx_connect = 0;
+    fdf->mlx_win = 0;
+	fdf->map = 0;
+    fdf->map->x_offset = 900;
+    fdf->map->y_offset = 900;
+	fdf->view = 0.78;
 }
