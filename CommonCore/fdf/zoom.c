@@ -1,30 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   matrix_manipulation.c                              :+:      :+:    :+:   */
+/*   zoom.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emedeiro <emedeiro@student.42.fr>          +#+  +:+       +#+        */
+/*   By: emedeiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/13 14:03:39 by emedeiro          #+#    #+#             */
-/*   Updated: 2024/08/14 11:50:07 by emedeiro         ###   ########.fr       */
+/*   Created: 2024/08/18 12:37:41 by emedeiro          #+#    #+#             */
+/*   Updated: 2024/08/18 12:38:35 by emedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void    matrix(t_point *row, char *line, int y)
+void	zoom(t_point *a, t_point *b, t_fdf *param)
 {
-    char    **data;
-    int     x;
-
-    x = 0;
-    data = ft_split(line, ' ');
-    if (!data)
-        return ;
-    while (data[x])
-    {
-        point(&row[x], data[x], x, y); 
-        x++;
-    }
-    free(data);
+	a->x *= param->scale;
+	a->y *= param->scale;
+	b->x *= param->scale;
+	b->y *= param->scale;
+	a->z *= param->z_scale;
+	b->z *= param->z_scale;
 }

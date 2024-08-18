@@ -1,21 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   screen_manipulation.c                              :+:      :+:    :+:   */
+/*   error_manipulation.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: emedeiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/14 07:45:21 by emedeiro          #+#    #+#             */
-/*   Updated: 2024/08/14 07:53:39 by emedeiro         ###   ########.fr       */
+/*   Created: 2024/08/18 11:15:42 by emedeiro          #+#    #+#             */
+/*   Updated: 2024/08/18 12:39:37 by emedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void    screen_settings(t_fdf *win)
+void	get_err(char *err)
 {
-    mlx_string_put(win->mlx, win->win, 10, 10, 0xFFFFFF, "Zoom: + -");
-    mlx_string_put(win->mlx, win->win, 10, 30, 0xFFFFFF, "Move: Arrows");
-    mlx_string_put(win->mlx, win->win, 10, 90, 0xFFFFFF, "Exit: ESC");
-    mlx_string_put(win->mlx, win->win, 10, 110, 0xFFFFFF, "Page Up: 5 3");
+    ft_putendl_fd(err, 2);
+    exit(EXIT_FAILURE);
 }
+
+int		is_extension_valid(char *file)
+{
+    int		i;
+    
+    i = ft_strlen(file);
+    if (i < 4)
+        return (0);
+    if (file[i - 1] == 'f' && file[i - 2] == 'd' && file[i - 3] == 'f' && file[i - 4] == '.')
+        return (1);
+    return (0);
+}
+

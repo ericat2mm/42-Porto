@@ -1,110 +1,105 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   fdf.h                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: emedeiro <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/08/17 12:48:47 by emedeiro          #+#    #+#             */
+/*   Updated: 2024/08/19 00:34:19 by emedeiro         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef FDF_H
 # define FDF_H
 
-#include "libft/libft.h"
-#include "libft/get_next_line.h"
-#include "minilibx_macos/mlx.h"
-#include <math.h>
+# include "libft/libft.h"
+# include "libft/get_next_line.h"
+# include "minilibx_macos/mlx.h"
+# include <math.h>
+# include <fcntl.h>
+# include "defines.h"
 
-#define WIN_WIDTH 1024 //because it's the resolution of my screen
-#define WIN_HEIGHT 1024
-
-typedef struct s_map t_map;
-
-typedef struct s_point
+typedef struct	s_point
 {
-    float x;
-    float y;
-    int z;
-    int color;
-    int value;
-    t_map *map;
-} t_point;
+    int		x;
+    int		y;
+    int		z;
+    int		color;
+    int		is_last;
+}				t_point;
 
-typedef struct s_image
+typedef struct	s_img
 {
-    void    *img;
-    char    *data;
-    int     size_l;
-    int     bpp;
-    int     endian;
-    char    *addr;
-} t_image;
+    void	*img;
+    char	*addr; // address of the first byte of the image
+    int		size_l;
+    int		bpp;
+    int		endian; // endian: 0 for little-endian, 1 for big-endian
+}				t_img;
 
-typedef struct s_fdf
+typedef struct	s_fdf
 {
-    void    *mlx;
-    void    *win;
-    t_map   *map;
-    t_image img;
-    double     view;
-    void   *mlx_connect;
-    void   *mlx_win;
-    int     data;
-} t_fdf;
+    void	*mlx_ptr;
+    void	*win_ptr;
+    t_img     img;
+    t_point	**matrix;
+    t_img    background;
+    int        width;
+    int        height;
+    double angle; // angle of rotation
+    int is_isometric; // is the projection isometric?
+    int shift_x; // shift for x-axis
+    int shift_y; // shift for y-axis
+    double z_scale; // scale for z-axis
+    double scale; // scale for x and y axis
+    int has_colors; // does the map have color info?
+    int color; // color of the line
+}				t_fdf;
 
-typedef struct s_map
-{
-    t_point **matrix;
-    t_fdf   *fdf;
-    int width;
-    int height;
-    int x_offset;
-    int y_offset;
-    int     alpha;
-    int     beta;
-} t_map;
+//COLOR_MANIPULATION
+int get_color_from_line(char *s);
+int ft_atoi_base(char *s);
 
-//BRESENHAM_UTILS.C
-float step_one(t_point *point_1, t_point *point_2);
-float step_one_two(t_point *point_1, t_point *point_2);
-float step_two(float dx, float dy, float max);
-float step_two_two(float dx, float max);
-float step_two_three(float dy, float max);
+//DRAW_MANIPULATION
+void draw(t_point **matrix, t_fdf *data);
+void draw_line(t_point p0, t_point p1, t_fdf *data);
+void push_image_to_win(t_fdf *data);
+void menu(t_fdf *data);
+void	put_pixel(t_img *data, int x, int y, int color);
 
-//DATA_MANIPULATION.C
-t_map   *ft_data(char *file);
+//DRAW_UTILS
+int get_color(t_fdf *data, t_point p0, t_point p1);
+int coordinate_x(float x, t_fdf *data);
+int coordinate_y(float y, t_fdf *data);
+void set_coordinates(t_point *p0, t_point *p1, t_fdf *data);
+void isometric(t_point *p, float angle);
 
-//DIMENSINS.C
-int dimensions(int *x, int *y, char *file);
-int count_words(char *s, char c);
+//ERROR_MANIPULATION
+void	get_err(char *err);
+int		is_extension_valid(char *file);
 
-//DRAW_MANIPULATION.C
-int draw(t_fdf *win);
-void bresenham_algorithm(t_point *point_1, t_point *point_2, t_fdf *win);
-void isometric(float *x, float *y, int z);
-void apply_isometric(t_point *point_1, t_point *point_2, t_fdf *win);
+//FDF
+int		ft_exit(t_fdf *data);
 
-//MAIN
-int check_args(int argc, char **argv);
-void	print_map(t_fdf *fdf);
+//INIT_MANIPULATION
+void init_controller_of_image(t_fdf *data, t_point **matrix);
+int map_has_colors(t_point **matrix);
+double get_scale(t_fdf *data);
+double get_z_scale(t_fdf *data);
+int ft_wordcount(char *s, char c);
 
-//FREE_MANIPULATION.C
-void    free_map(t_map *map);
-void   free_fdf(t_fdf *fdf);
-void    exit_free(t_fdf *fdf);
+//KEY_MANIPULATION
+int		catch_events(int key, t_fdf *data);
+void	choose_key(int key, t_fdf *data);
+void	get_back_to_normal_state(t_fdf *data);
+void	do_key(int key, t_fdf *data);
 
-//INIT_MANIPULATION.C
-t_map   *init_map(void);
-t_fdf   *init_fdf(t_map *map);
+//PARSE_MANIPULATION
+t_point **parse_map(char *file);
+void parse_line(t_point **matrix, char *line);
+void is_number_valid(char *s);
 
-//KEY_MANIPULATION.C
-//int key_hook(int keycode, t_fdf *fdf);
-int     exit_hook(t_fdf *fdf);
-
-//MATRIX_MANIPULATION.C
-void    matrix(t_point *row, char *line, int y);
-
-//POINT_MANIPULATION.C
-void    point(t_point *point, char *coords, int x, int y);
-
-//READ_MANIPULATION.C
-char    *read_map(char *file, t_map *map);
-//RENDER_MANIPULATION.C
-void render(t_fdf *fdf);
-void    background(t_image *img, int color);
-void	img_pix_put(t_image *img, int x, int y, int color);
-
-//SCREEN_SETTINGS.C
-void    screen_settings(t_fdf *win);
+//ZOOM
+void	zoom(t_point *a, t_point *b, t_fdf *param);
 #endif
