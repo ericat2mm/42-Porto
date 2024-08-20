@@ -5,28 +5,64 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: emedeiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/18 11:15:42 by emedeiro          #+#    #+#             */
-/*   Updated: 2024/08/18 12:39:37 by emedeiro         ###   ########.fr       */
+/*   Created: 2024/08/19 11:51:04 by emedeiro          #+#    #+#             */
+/*   Updated: 2024/08/19 14:26:24 by emedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	get_err(char *err)
+int	is_extension_valid(const char *s)
 {
-    ft_putendl_fd(err, 2);
-    exit(EXIT_FAILURE);
-}
+    size_t	i;
 
-int		is_extension_valid(char *file)
-{
-    int		i;
-    
-    i = ft_strlen(file);
-    if (i < 4)
+    i = 0;
+    while (s[i])
+        i++;
+    if (i < 5)
         return (0);
-    if (file[i - 1] == 'f' && file[i - 2] == 'd' && file[i - 3] == 'f' && file[i - 4] == '.')
-        return (1);
-    return (0);
+    if (ft_strcmp(s + i - 4, ".fdf") != 0)
+        return (0);
+    return (1);
+}
+void	get_err(const char *err)
+{
+	size_t	i;
+
+	i = 0;
+	while (err[i])
+	{
+		write(2, &err[i], 1);
+		i++;
+	}
+	exit(EXIT_FAILURE);
+}
+int	open_file(char *file_name, int permissions)
+{
+	int	fd;
+
+	fd = open(file_name, permissions);
+	if (fd < 0)
+		get_err(FILE_ERR);
+	return (fd);
 }
 
+int ft_strcmp(const char *s1, const char *s2)
+{
+    size_t i;
+
+    i = 0;
+    while (s1[i] && s2[i] && s1[i] == s2[i])
+        i++;
+    return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+}
+
+void	*alloc_mem(size_t size, size_t size_of)
+{
+	void	*mem;
+
+	mem = malloc (size * size_of);
+	if (!mem)
+		get_err(MALLOC_ERR);
+	return (mem);
+}

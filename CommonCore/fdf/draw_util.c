@@ -5,54 +5,50 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: emedeiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/18 12:10:07 by emedeiro          #+#    #+#             */
-/*   Updated: 2024/08/18 12:14:50 by emedeiro         ###   ########.fr       */
+/*   Created: 2024/08/19 11:51:08 by emedeiro          #+#    #+#             */
+/*   Updated: 2024/08/19 12:30:01 by emedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-int get_color(t_fdf *data, t_point p0, t_point p1)
+void	set_coordinates(t_point *a, t_point *b, t_fdf *param)
 {
-    int color;
-
-    if (data->color)
-    {
-        if (p0.color == p1.color)
-            color = p0.color;
-        else
-            color = 0xFFFFFF;
-    }
-    else
-        color = 0xFFFFFF;
-    return (color);
+	zoom(a, b, param);
+	if (param->is_isometric)
+	{
+		isometric(a, param->angle);
+		isometric(b, param->angle);
+	}
+	a->x += param->shift_x;
+	a->y += param->shift_y;
+	b->x += param->shift_x;
+	b->y += param->shift_y;
+}
+float	abs_value(float x)
+{
+	if (x < 0)
+		return (-x);
+	return (x);
 }
 
-int coordinate_x(float x, t_fdf *data)
+float	max_value(float x, float y)
 {
-    return (x * data->scale + data->shift_x);
+	if (x > y)
+		return (x);
+	return (y);
 }
 
-int coordinate_y(float y, t_fdf *data)
+int	coordinates_x(float x, t_fdf *data)
 {
-    return (y * data->scale + data->shift_y);
+	if ((int)round(x) >= data->win_x)
+		return ((int) x);
+	return ((int) round(x));
 }
 
-void set_coordinates(t_point *p0, t_point *p1, t_fdf *data)
+int	coordinates_y(float y, t_fdf *data)
 {
-    zoom(p0, p1, data);
-    if (data->is_isometric)
-    {
-        isometric(p0, data->angle);
-        isometric(p1, data->angle);
-    }
-    p0->x += data->shift_x;
-    p0->y += data->shift_y;
-    p1->x += data->shift_x;
-    p1->y += data->shift_y;
-}
-void isometric(t_point *p, float angle)
-{
-    p->x = (p->x - p->y) * cos(angle);
-    p->y = (p->x + p->y) * sin(angle) - p->z;
+	if ((int) round(y) >= data->win_y)
+		return ((int) y);
+	return ((int) round(y));
 }

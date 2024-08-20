@@ -1,17 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   zoom.c                                             :+:      :+:    :+:   */
+/*   draw_util2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: emedeiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/18 12:37:41 by emedeiro          #+#    #+#             */
-/*   Updated: 2024/08/18 12:38:35 by emedeiro         ###   ########.fr       */
+/*   Created: 2024/08/19 12:33:25 by emedeiro          #+#    #+#             */
+/*   Updated: 2024/08/19 12:35:25 by emedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
+void	isometric(t_point *dot, double angle)
+{
+	dot->x = (dot->x - dot->y) * cos(angle);
+	dot->y = (dot->x + dot->y) * sin(angle) - dot->z;
+}
 void	zoom(t_point *a, t_point *b, t_fdf *param)
 {
 	a->x *= param->scale;

@@ -5,75 +5,138 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: emedeiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/18 11:17:20 by emedeiro          #+#    #+#             */
-/*   Updated: 2024/08/19 00:35:00 by emedeiro         ###   ########.fr       */
+/*   Created: 2024/08/19 11:50:48 by emedeiro          #+#    #+#             */
+/*   Updated: 2024/08/19 13:14:58 by emedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-t_point **parse_map(char *file)
+t_point	**parse_map(char *file_name)
 {
-    t_point **matriz;
-    int fd;
-    char *line;
-    int y;
+	t_point	**matrix;
+	int		y;
+	int		fd;
+	char	*line;
 
-    y = 0;
-    line = NULL;
-    fd = open(file, O_RDONLY);
-    if (fd < 0)
-        get_err(FILE_ERR);
-    while(line == get_next_line(fd))
-        y++;
-    close(fd);
-    matriz = (t_point **)malloc(sizeof(t_point *) * y);
-    fd = open(file, O_RDONLY);
-    y = 0;
-    while (get_next_line(fd))
-    {
-        matriz[y] = (t_point *)malloc(sizeof(t_point) * ft_wordcount(line, ' '));
-        parse_line(&matriz[y], line);
-        y++;
-    }
-    close(fd);
-    return (matriz);
+	matrix = allocate_dots(file_name);
+	fd = open_file(file_name, O_RDONLY);
+	y = 0;
+	line = get_next_line(fd);
+	if (!line)
+		get_err(INVALID_MAP_ERR);
+	while (line)
+	{
+		get_dots(line, matrix, y++);
+		free(line);
+		line = get_next_line(fd);
+	}
+	if (line)
+		free(line);
+	if (matrix[y])
+		free(matrix[y]);
+	matrix[y] = NULL;
+	close(fd);
+	return (matrix);
 }
-void parse_line(t_point **matrix, char *line)
+
+t_point	**allocate_dots(char *file_name)
 {
-    char	**dots;
+	t_point    **matrix;
 	int		x;
-    int y;
+	int		y;
+	int		fd;
+	char	*line;
+
+	fd = open_file(file_name, O_RDONLY);
+	line = get_next_line(fd);
+	if (!line)
+		get_err(INVALID_MAP_ERR);
+	x = ft_wdcounter(line, ' ');
+	y = 0;
+	while (line)
+	{
+		y++;
+		free(line);
+		line = get_next_line(fd);
+	}
+	if (line)
+		free(line);
+	matrix = (t_point **)malloc(sizeof(t_point *) * (++y + 1));
+	while (y > 0)
+		matrix[--y] = (t_point *)malloc(sizeof(t_point) * (x + 1));
+	close(fd);
+	return (matrix);
+}
+int	get_dots(char *line, t_point **matrix, int y)
+{
+	char	**dots;
+	int		x;
 
 	if (!line)
 		get_err(INVALID_MAP_ERR);
 	dots = ft_split(line, ' ');
 	x = 0;
-    y = 0;
 	while (dots[x])
 	{
 		is_number_valid(dots[x]);
 		matrix[y][x].z = ft_atoi(dots[x]);
 		matrix[y][x].x = x;
 		matrix[y][x].y = y;
-		matrix[y][x].color = get_color_from_line(*(dots + x));
-        matrix[y][x].is_last = 0;
+		matrix[y][x].color = get_color_line(*(dots + x));
+		matrix[y][x].is_last = 0;
 		free(dots[x++]);
 	}
 	free(dots);
 	matrix[y][--x].is_last = 1;
+	return (x);
+}
+void	is_number_valid(char *s)
+{
+	int	i;
+
+	if (!s)
+		get_err(INVALID_MAP_ERR);
+	i = 0;
+	i += (s[i] == '-');
+	while (s[i] && s[i] != ',')
+	{
+		if (!ft_isdigit(s[i]) && (s[i] != ' ' || s[i] != '\t' \
+            || s[i] != '\n' || s[i] != '\v' || s[i] != '\f' || s[i] != '\r'))
+			get_err(INVALID_MAP_ERR);
+		i++;
+	}
+	if (!s[i] || s[i] == ' ')
+		return ;
+	i += 1;
+	if (ft_strlen(s + i) < 3)
+		get_err(INVALID_MAP_ERR);
+	while (s[i])
+	{
+		if (!in_string("0123456789abcdef", to_lower(s[i])))
+			get_err(INVALID_MAP_ERR);
+		i++;
+	}
 }
 
-//is_number_valid function
-void is_number_valid(char *s)
+//ft_wordcounter
+int	ft_wdcounter(char const *s, char c)
 {
-    int i;
+    int	i;
+    int	count;
 
     i = 0;
+    count = 0;
     while (s[i])
     {
-        if (!ft_isdigit(s[i]) && s[i] != '-')
-            get_err(INVALID_MAP_ERR);
-        i++;
+        if (s[i] != c)
+        {
+            count++;
+            while (s[i] && s[i] != c)
+                i++;
+        }
+        else
+            i++;
     }
+    return (count);
 }

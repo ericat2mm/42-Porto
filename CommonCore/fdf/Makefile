@@ -6,7 +6,7 @@
 #    By: emedeiro <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/06 16:10:18 by emedeiro          #+#    #+#              #
-#    Updated: 2024/08/18 12:33:35 by emedeiro         ###   ########.fr        #
+#    Updated: 2024/08/19 13:16:15 by emedeiro         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,9 +26,10 @@ CFLAGS = -Wall -Wextra -Werror
 MINILIBX =  -L./minilibx_macos -lmlx -framework OpenGL -framework AppKit
 
 ## SOURCE FILES ##
-SRCS = color_manipulation.c draw_manipulation.c draw_util.c  \
+SRCS = color_manipulation.c draw_manipulation.c draw_util.c  draw_util2.c\
 	error_manipulation.c fdf.c init_manipulation.c key_manipulation.c \
-	parse_manipulation.c
+	parse_manipulation.c parse_utils.c key_manipulation2.c \
+	colors.c
 
 ## OBJECT FILES ##
 OBJS = $(SRCS:.c=.o)
