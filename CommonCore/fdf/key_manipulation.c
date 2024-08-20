@@ -6,7 +6,7 @@
 /*   By: emedeiro <emedeiro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 11:50:43 by emedeiro          #+#    #+#             */
-/*   Updated: 2024/08/20 16:36:29 by emedeiro         ###   ########.fr       */
+/*   Updated: 2024/08/20 17:37:38 by emedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int catch_events(int key, t_fdf *data)
         draw(data->matrix, data);
     }
 
-    if (key == '5')
+    if (key == 65307) //esc
     {
         if (data->img.img)
             mlx_destroy_image(data->mlx_ptr, data->img.img);

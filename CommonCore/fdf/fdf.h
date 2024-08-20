@@ -6,7 +6,7 @@
 /*   By: emedeiro <emedeiro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 11:51:26 by emedeiro          #+#    #+#             */
-/*   Updated: 2024/08/20 16:30:37 by emedeiro         ###   ########.fr       */
+/*   Updated: 2024/08/20 17:40:31 by emedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,9 @@ void	get_err(const char *err);
 int	open_file(char *file_name, int permissions);
 int	ft_strcmp(const char *s1, const char *s2);
 void	*alloc_mem(size_t size, size_t size_of);
+
+//fdf
+int close_window(void *param);
 
 //FREE
 void	free_resources(t_fdf *data);
