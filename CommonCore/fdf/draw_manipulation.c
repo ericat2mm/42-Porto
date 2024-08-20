@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_manipulation.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emedeiro <emedeiro@student.42.fr>          +#+  +:+       +#+        */
+/*   By: emedeiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 11:51:12 by emedeiro          #+#    #+#             */
-/*   Updated: 2024/08/20 16:38:54 by emedeiro         ###   ########.fr       */
+/*   Updated: 2024/08/20 22:56:36 by emedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ void	draw(t_point **matrix, t_fdf *data)
 	push_image_to_window(data);
 	menu(data);
 }
+
 void	draw_line(t_point a, t_point b, t_fdf *param)
 {
 	float	step_x;
@@ -62,6 +63,7 @@ void	draw_line(t_point a, t_point b, t_fdf *param)
 		a.y += step_y;
 	}
 }
+
 void	push_image_to_window(t_fdf *data)
 {
 	void	*previous_image;
@@ -73,6 +75,7 @@ void	push_image_to_window(t_fdf *data)
 	data->img.addr = mlx_get_data_addr(data->img.img, \
 	&data->img.bits_per_pixel, &data->img.line_length, &data->img.endian);
 }
+
 void	my_mlx_pixel_put(t_image *data, int x, int y, int color)
 {
 	char	*dst;
@@ -80,6 +83,7 @@ void	my_mlx_pixel_put(t_image *data, int x, int y, int color)
 	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
 	*(unsigned int *) dst = color;
 }
+
 void	menu(t_fdf *param)
 {
 	char	*menu;

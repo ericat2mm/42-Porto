@@ -6,7 +6,7 @@
 /*   By: emedeiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 11:51:20 by emedeiro          #+#    #+#             */
-/*   Updated: 2024/08/19 13:09:38 by emedeiro         ###   ########.fr       */
+/*   Updated: 2024/08/20 22:36:17 by emedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ int	get_random_white_color(void)
 	arr[5] = 0xfffafa;
 	return (arr[rand() % 6]);
 }
+
 void	set_color_styles(t_fdf *data)
 {
 	data->color_style = (data->color_style + 1) % (4 + data->has_colors);

@@ -6,7 +6,7 @@
 /*   By: emedeiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 12:12:26 by emedeiro          #+#    #+#             */
-/*   Updated: 2024/08/19 12:52:41 by emedeiro         ###   ########.fr       */
+/*   Updated: 2024/08/20 22:55:03 by emedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,14 @@ int	in_string(char *s, char c)
 	}
 	return (1);
 }
+
 char	to_lower(char c)
 {
 	if (c >= 'A' && c <= 'Z')
 		return (c + 32);
 	return (c);
 }
+
 int	get_color_line(char *s)
 {
 	int	i;
@@ -42,6 +44,7 @@ int	get_color_line(char *s)
 		return (-1);
 	return (hex_to_int(s + i + 2));
 }
+
 int	hex_to_int(char *s)
 {
 	char	*hex;
@@ -58,6 +61,7 @@ int	hex_to_int(char *s)
 	}
 	return (res);
 }
+
 int	index_of(char *s, char c)
 {
 	int	i;

@@ -6,7 +6,7 @@
 /*   By: emedeiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 11:51:08 by emedeiro          #+#    #+#             */
-/*   Updated: 2024/08/19 12:30:01 by emedeiro         ###   ########.fr       */
+/*   Updated: 2024/08/20 22:37:33 by emedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	set_coordinates(t_point *a, t_point *b, t_fdf *param)
 	b->x += param->shift_x;
 	b->y += param->shift_y;
 }
+
 float	abs_value(float x)
 {
 	if (x < 0)

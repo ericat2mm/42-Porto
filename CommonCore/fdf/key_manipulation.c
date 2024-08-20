@@ -3,58 +3,55 @@
 /*                                                        :::      ::::::::   */
 /*   key_manipulation.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emedeiro <emedeiro@student.42.fr>          +#+  +:+       +#+        */
+/*   By: emedeiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 11:50:43 by emedeiro          #+#    #+#             */
-/*   Updated: 2024/08/20 17:37:38 by emedeiro         ###   ########.fr       */
+/*   Updated: 2024/08/20 22:49:03 by emedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-int ft_exit(void *param)
+int	ft_exit(void *param)
 {
-    t_fdf *data;
+	t_fdf	*data;
 
-    data = (t_fdf *)param;
+	data = (t_fdf *)param;
 	if (data)
-    {
+	{
 		free_resources(data);
 		free(data);
 	}
-    ft_putstr_fd(END_MSG, 2);
-    free(data);
-    exit(EXIT_SUCCESS);
+	ft_putstr_fd(END_MSG, 2);
+	free(data);
+	exit(EXIT_SUCCESS);
 }
 
-int catch_events(int key, t_fdf *data)
+int	catch_events(int key, t_fdf *data)
 {
-    if (is_key(key))
-    {
-        mlx_clear_window(data->mlx_ptr, data->win_ptr);
-        do_key(key, data);
-        menu(data);
-        draw(data->matrix, data);
-    }
-
-    if (key == 65307) //esc
-    {
-        if (data->img.img)
-            mlx_destroy_image(data->mlx_ptr, data->img.img);
-        if (data->win_ptr)
-            mlx_destroy_window(data->mlx_ptr, data->win_ptr);
-        if (data->mlx_ptr)
-        {
-            mlx_destroy_display(data->mlx_ptr);
-            free(data->mlx_ptr);
-        }
-        free_resources(data);
-
-        exit(EXIT_SUCCESS);
-    }
-    return 0;
+	if (is_key(key))
+	{
+		mlx_clear_window(data->mlx_ptr, data->win_ptr);
+		do_key(key, data);
+		menu(data);
+		draw(data->matrix, data);
+	}
+	if (key == 65307)
+	{
+		if (data->img.img)
+			mlx_destroy_image(data->mlx_ptr, data->img.img);
+		if (data->win_ptr)
+			mlx_destroy_window(data->mlx_ptr, data->win_ptr);
+		if (data->mlx_ptr)
+		{
+			mlx_destroy_display(data->mlx_ptr);
+			free(data->mlx_ptr);
+		}
+		free_resources(data);
+		exit(EXIT_SUCCESS);
+	}
+	return (0);
 }
-
 
 void	do_key(int key, t_fdf *data)
 {
@@ -78,6 +75,7 @@ void	do_key(int key, t_fdf *data)
 	if (key == 'c')
 		set_color_styles(data);
 }
+
 void	scale_events(int key, t_fdf *data)
 {
 	if (key == 'o')
@@ -89,6 +87,7 @@ void	scale_events(int key, t_fdf *data)
 	if ((key == 'w') && data->is_isometric)
 		data->z_scale -= get_z_scale(data);
 }
+
 void	get_back_to_normal_state(t_fdf *data)
 {
 	data->scale = get_scale(data) * 25;

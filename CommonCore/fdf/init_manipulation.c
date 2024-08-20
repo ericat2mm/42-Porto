@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_manipulation.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emedeiro <emedeiro@student.42.fr>          +#+  +:+       +#+        */
+/*   By: emedeiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 11:50:38 by emedeiro          #+#    #+#             */
-/*   Updated: 2024/08/20 16:18:32 by emedeiro         ###   ########.fr       */
+/*   Updated: 2024/08/20 22:47:00 by emedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,12 @@
 void	init_controller(t_fdf *data, t_point **matrix)
 {
 	data->matrix = matrix;
-	data->map_largenest = get_map_largenest(matrix); //we need to scale the map
+	data->map_largenest = get_map_largenest(matrix);
 	data->scale = get_scale(data) * 25;
 	data->z_scale = get_z_scale(data);
 	data->is_isometric = 1;
 	data->random_color = 0;
-	data->angle = 0.663599; //why 35?? because it's the best angle to view the map
+	data->angle = 0.663599;
 	data->win_x = 1300;
 	data->win_y = 800;
 	data->shift_x = data->win_x / 3;
@@ -35,6 +35,7 @@ void	init_controller(t_fdf *data, t_point **matrix)
 	if (!data->win_ptr)
 		get_err(WIN_ERR);
 }
+
 int	get_map_largenest(t_point **matrix)
 {
 	int	y;
@@ -48,6 +49,7 @@ int	get_map_largenest(t_point **matrix)
 		y++;
 	return (y + x);
 }
+
 double	get_scale(t_fdf *data)
 {
 	if (data->map_largenest < 100)
@@ -64,6 +66,7 @@ double	get_scale(t_fdf *data)
 		return (0.3);
 	return (0.2);
 }
+
 double	get_z_scale(t_fdf *data)
 {
 	if (data->map_largenest < 50)
