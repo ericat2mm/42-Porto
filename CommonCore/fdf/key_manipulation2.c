@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_manipulation2.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emedeiro <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: emedeiro <emedeiro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 12:59:29 by emedeiro          #+#    #+#             */
-/*   Updated: 2024/08/19 12:59:36 by emedeiro         ###   ########.fr       */
+/*   Updated: 2024/08/20 13:53:48 by emedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,9 @@
 
 int	is_key(int key)
 {
-	return (key == 8 || key == 24 || key == 36 || \
-	key == 69 || key == 27 || key == 78 || \
-	key == 91 || key == 28 || key == 84 || key == 19 || \
-	key == '~' || key == '}' || key == '{' || key == '|' || \
-	key == 87 || key == 23 || key == 86 || key == 21 || \
-	key == 49 || key == 88 || key == 22);
+	return (key == 'c' || key == 'o' || key == 'n' || \
+ 			key == '-'|| key == 'w' || key == 's'  ||\
+			key == '1' ||key == '4' || key == 22 ||
+			key == 'a' || key == 'd' || \
+			key == '6' || key == 'z' || key == 'x');
 }

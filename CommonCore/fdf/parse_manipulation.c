@@ -3,42 +3,48 @@
 /*                                                        :::      ::::::::   */
 /*   parse_manipulation.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emedeiro <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: emedeiro <emedeiro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 11:50:48 by emedeiro          #+#    #+#             */
-/*   Updated: 2024/08/19 13:14:58 by emedeiro         ###   ########.fr       */
+/*   Updated: 2024/08/20 14:35:17 by emedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-t_point	**parse_map(char *file_name)
+#include <fcntl.h> // Para open
+#include <unistd.h> // Para close
+#include "fdf.h"    // Inclua o cabeçalho apropriado para sua definição de t_point e outras funções
+
+t_point **parse_map(char *file_name)
 {
-	t_point	**matrix;
+    t_point	**matrix;
 	int		y;
 	int		fd;
 	char	*line;
 
-	matrix = allocate_dots(file_name);
-	fd = open_file(file_name, O_RDONLY);
-	y = 0;
-	line = get_next_line(fd);
-	if (!line)
-		get_err(INVALID_MAP_ERR);
-	while (line)
-	{
-		get_dots(line, matrix, y++);
-		free(line);
-		line = get_next_line(fd);
-	}
-	if (line)
-		free(line);
-	if (matrix[y])
-		free(matrix[y]);
-	matrix[y] = NULL;
-	close(fd);
-	return (matrix);
+    matrix = allocate_dots(file_name);
+    fd = open_file(file_name, O_RDONLY);
+    y = 0;
+    line = get_next_line(fd);
+    if (!line)
+    {
+        free(matrix);
+        get_err(INVALID_MAP_ERR);
+    }
+    while (line)
+    {
+        get_dots(line, matrix, y++);
+        free(line);
+        line = get_next_line(fd);
+    }
+    if (matrix[y])
+        free(matrix[y]);
+    matrix[y] = NULL;
+    close(fd);
+    return matrix;
 }
+
 
 t_point	**allocate_dots(char *file_name)
 {
@@ -98,18 +104,19 @@ void	is_number_valid(char *s)
 	if (!s)
 		get_err(INVALID_MAP_ERR);
 	i = 0;
-	i += (s[i] == '-');
+	i += (s[i] == '-'); //if s[i] == '-' incrementa i
 	while (s[i] && s[i] != ',')
 	{
-		if (!ft_isdigit(s[i]) && (s[i] != ' ' || s[i] != '\t' \
-            || s[i] != '\n' || s[i] != '\v' || s[i] != '\f' || s[i] != '\r'))
+		if (!(ft_isdigit(s[i]) == 1 || ft_isdigit(s[i]) == 2) && (s[i] != ' ' || s[i] != '\t' \
+            || s[i] != '\v' || s[i] != '\f' || s[i] != '\r'))
 			get_err(INVALID_MAP_ERR);
 		i++;
 	}
-	if (!s[i] || s[i] == ' ')
+	
+	if (!s[i] || s[i] == ' ' || s[i] == '\n')
 		return ;
 	i += 1;
-	if (ft_strlen(s + i) < 3)
+	if (ft_strlen(s + i) < 3) //3 -> minimo de uma cor hexagdecimal
 		get_err(INVALID_MAP_ERR);
 	while (s[i])
 	{
@@ -118,8 +125,6 @@ void	is_number_valid(char *s)
 		i++;
 	}
 }
-
-//ft_wordcounter
 int	ft_wdcounter(char const *s, char c)
 {
     int	i;

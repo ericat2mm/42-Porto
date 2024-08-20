@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emedeiro <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: emedeiro <emedeiro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 11:51:26 by emedeiro          #+#    #+#             */
-/*   Updated: 2024/08/19 13:18:20 by emedeiro         ###   ########.fr       */
+/*   Updated: 2024/08/20 11:26:12 by emedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,13 @@
 
 # include "libft/libft.h"
 # include "libft/get_next_line.h"
-# include "minilibx_macos/mlx.h"
+# include "minilibx-linux/mlx.h"
 #include "defines.h"
 
 # include <math.h>
 # include <fcntl.h>
+# include <X11/keysym.h>
+# include <X11/X.h>
 
 typedef struct s_point
 {

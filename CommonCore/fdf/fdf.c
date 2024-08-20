@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emedeiro <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: emedeiro <emedeiro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 11:50:59 by emedeiro          #+#    #+#             */
-/*   Updated: 2024/08/19 14:30:56 by emedeiro         ###   ########.fr       */
+/*   Updated: 2024/08/20 14:25:18 by emedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,14 @@ int	main(int argc, char **argv)
 
     if (argc != 2)
         get_err(INPUT_ERR);
-    if (is_extension_valid(argv[1]) == 0)
-        get_err(EXTENSION_ERR);
+    if(!is_extension_valid(argv[1]))
+         get_err(EXTENSION_ERR);
 	matrix = parse_map(argv[1]);
+	if (!parse_map(argv[1]))
+	{
+		free(matrix);
+		exit(EXIT_FAILURE);
+	}
 	printf(LOGO);
 	data = (t_fdf *) alloc_mem(1, sizeof(t_fdf));
 	init_controller(data, matrix);
@@ -30,6 +35,6 @@ int	main(int argc, char **argv)
 	&data->img.bits_per_pixel, &data->img.line_length, &data->img.endian);
 	draw(matrix, data);
 	mlx_hook(data->win_ptr, 17, 0, ft_exit, data);
-	mlx_hook(data->win_ptr, 2, 1L << 0, catch_events, data);
+	mlx_hook(data->win_ptr, KeyPress, KeyPressMask, catch_events, data);
 	mlx_loop(data->mlx_ptr);
 }

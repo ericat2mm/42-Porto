@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_manipulation.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emedeiro <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: emedeiro <emedeiro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 11:50:43 by emedeiro          #+#    #+#             */
-/*   Updated: 2024/08/19 14:11:32 by emedeiro         ###   ########.fr       */
+/*   Updated: 2024/08/20 14:21:51 by emedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,10 @@ int	catch_events(int key, t_fdf *data)
 	}
 	if (key == '5')
 	{
+		mlx_destroy_image(data->mlx_ptr, data->img.img);
 		mlx_destroy_window(data->mlx_ptr, data->win_ptr);
+		mlx_destroy_display(data->mlx_ptr);
+		free(data->mlx_ptr);
 		ft_exit(data);
 	}
 	return (0);
@@ -38,34 +41,34 @@ int	catch_events(int key, t_fdf *data)
 void	do_key(int key, t_fdf *data)
 {
 	scale_events(key, data);
-	if (key == '~')
+	if (key == 'w')
 		data->shift_y -= 10;
-	if (key == '}')
+	if (key == 's')
 		data->shift_y += 10;
-	if (key == '{')
+	if (key == 'a')
 		data->shift_x -= 10;
-	if (key == '|')
+	if (key == 'd')
 		data->shift_x += 10;
-	if (key == 49 || key == 87 || key == 23)
+	if (key == '1')
 		data->is_isometric = !data->is_isometric;
-	if ((key == 86 || key == 21) && data->is_isometric)
+	if ((key == 'z') && data->is_isometric)
 		data->angle += 0.07;
-	if ((key == 88 || key == 22) && data->is_isometric)
+	if ((key == 'x') && data->is_isometric)
 		data->angle -= 0.07;
-	if (key == 36)
+	if (key == 'n')
 		get_back_to_normal_state(data);
-	if (key == 8)
+	if (key == 'c')
 		set_color_styles(data);
 }
 void	scale_events(int key, t_fdf *data)
 {
-	if (key == 24 || key == 69)
+	if (key == 'o')
 		data->scale += get_scale(data);
-	if (key == 27 || key == 78)
+	if (key == '-')
 		data->scale -= get_scale(data);
-	if ((key == 91 || key == 28) && data->is_isometric)
+	if ((key == 's') && data->is_isometric)
 		data->z_scale += get_z_scale(data);
-	if ((key == 84 || key == 19) && data->is_isometric)
+	if ((key == 'w') && data->is_isometric)
 		data->z_scale -= get_z_scale(data);
 }
 void	get_back_to_normal_state(t_fdf *data)

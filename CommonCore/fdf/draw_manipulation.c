@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_manipulation.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emedeiro <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: emedeiro <emedeiro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 11:51:12 by emedeiro          #+#    #+#             */
-/*   Updated: 2024/08/19 13:10:44 by emedeiro         ###   ########.fr       */
+/*   Updated: 2024/08/20 13:52:02 by emedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,18 +84,16 @@ void	menu(t_fdf *param)
 {
 	char	*menu;
 
-	menu = "ENTER TO GET BACK TO INITIAL STATE";
+	menu = "n -> GET BACK TO INITIAL STATE";
 	mlx_string_put(param->mlx_ptr, param->win_ptr, 20, 10, 0xffffff, menu);
-	menu = "5 OR SPACE SWITCHING BETWEEN 3D/2D MODES";
+	menu = "1 -> SWITCHING BETWEEN 3D/2D MODES";
 	mlx_string_put(param->mlx_ptr, param->win_ptr, 20, 45, 0xffffff, menu);
-	menu = "+ OR - ZOOM IN OR ZOOM OUT";
+	menu = "+ OR - -> ZOOM IN OR ZOOM OUT";
 	mlx_string_put(param->mlx_ptr, param->win_ptr, 20, 80, 0xffffff, menu);
-	menu = "C TO CHANGE COLORS MODE";
-	mlx_string_put(param->mlx_ptr, param->win_ptr, 20, 115, 0xffffff, menu);
-	menu = "8 OR 2 KEYS FOR Z-SCALING THE MODEL";
+	menu = "8 OR 2 OR c -> COLORS";
 	mlx_string_put(param->mlx_ptr, param->win_ptr, 20, 150, 0xffffff, menu);
-	menu = "4 OR 6 KEYS FOR ROTATING THE MODEL";
+	menu = "4 OR 6 -> KEYS FOR ROTATING THE MODEL";
 	mlx_string_put(param->mlx_ptr, param->win_ptr, 20, 185, 0xffffff, menu);
-	menu = "MOVE PICTURE BY PRESSING ARROW KEYS";
+	menu = "w s d a -> MOVE PICTURE LIKE ARROW KEYS";
 	mlx_string_put(param->mlx_ptr, param->win_ptr, 20, 220, 0xffffff, menu);
 }
