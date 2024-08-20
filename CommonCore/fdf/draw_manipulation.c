@@ -6,7 +6,7 @@
 /*   By: emedeiro <emedeiro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 11:51:12 by emedeiro          #+#    #+#             */
-/*   Updated: 2024/08/20 13:52:02 by emedeiro         ###   ########.fr       */
+/*   Updated: 2024/08/20 16:38:54 by emedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ void	menu(t_fdf *param)
 	mlx_string_put(param->mlx_ptr, param->win_ptr, 20, 10, 0xffffff, menu);
 	menu = "1 -> SWITCHING BETWEEN 3D/2D MODES";
 	mlx_string_put(param->mlx_ptr, param->win_ptr, 20, 45, 0xffffff, menu);
-	menu = "+ OR - -> ZOOM IN OR ZOOM OUT";
+	menu = "o OR - -> ZOOM IN OR ZOOM OUT";
 	mlx_string_put(param->mlx_ptr, param->win_ptr, 20, 80, 0xffffff, menu);
 	menu = "8 OR 2 OR c -> COLORS";
 	mlx_string_put(param->mlx_ptr, param->win_ptr, 20, 150, 0xffffff, menu);

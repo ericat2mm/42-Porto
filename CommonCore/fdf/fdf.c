@@ -6,7 +6,7 @@
 /*   By: emedeiro <emedeiro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 11:50:59 by emedeiro          #+#    #+#             */
-/*   Updated: 2024/08/20 14:25:18 by emedeiro         ###   ########.fr       */
+/*   Updated: 2024/08/20 16:24:24 by emedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,17 @@ int	main(int argc, char **argv)
 	t_point		**matrix;
 	t_fdf	*data;
 
+	data = NULL;
     if (argc != 2)
         get_err(INPUT_ERR);
     if(!is_extension_valid(argv[1]))
          get_err(EXTENSION_ERR);
 	matrix = parse_map(argv[1]);
-	if (!parse_map(argv[1]))
+	
+	if(matrix == NULL)
 	{
 		free(matrix);
-		exit(EXIT_FAILURE);
+		get_err(MALLOC_ERR);
 	}
 	printf(LOGO);
 	data = (t_fdf *) alloc_mem(1, sizeof(t_fdf));

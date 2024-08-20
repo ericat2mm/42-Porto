@@ -6,7 +6,7 @@
 /*   By: emedeiro <emedeiro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 11:51:04 by emedeiro          #+#    #+#             */
-/*   Updated: 2024/08/20 14:29:43 by emedeiro         ###   ########.fr       */
+/*   Updated: 2024/08/20 16:20:30 by emedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	get_err(const char *err)
 		write(2, &err[i], 1);
 		i++;
 	}
-	exit(EXIT_FAILURE);
+	ft_exit(NULL);
 }
 int	open_file(char *file_name, int permissions)
 {

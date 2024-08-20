@@ -6,7 +6,7 @@
 /*   By: emedeiro <emedeiro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 11:51:26 by emedeiro          #+#    #+#             */
-/*   Updated: 2024/08/20 11:26:12 by emedeiro         ###   ########.fr       */
+/*   Updated: 2024/08/20 16:30:37 by emedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,9 @@ typedef struct s_fdf
 	t_image			banner;
 }	t_fdf;
 
+//ALLOCATE_DOTS_MALLOC
+t_point **create_malloc_matrix(int rows, int cols);
+
 //COLORS
 int	colors_mode1(t_point a, t_point b);
 int	colors_mode2(t_point a, t_point b);
@@ -101,6 +104,9 @@ int	open_file(char *file_name, int permissions);
 int	ft_strcmp(const char *s1, const char *s2);
 void	*alloc_mem(size_t size, size_t size_of);
 
+//FREE
+void	free_resources(t_fdf *data);
+
 //INIT_MANIPULATION
 void	init_controller(t_fdf *data, t_point **matrix);
 int	get_map_largenest(t_point **matrix);
@@ -109,7 +115,7 @@ double	get_z_scale(t_fdf *data);
 int	is_map_has_colors(t_point **matrix);
 
 //KEY_MANIPULATION
-int	ft_exit(t_fdf *data);
+int	ft_exit(void *param);
 int	catch_events(int key, t_fdf *data);
 void	do_key(int key, t_fdf *data);
 void	scale_events(int key, t_fdf *data);

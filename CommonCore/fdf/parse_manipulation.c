@@ -6,15 +6,11 @@
 /*   By: emedeiro <emedeiro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 11:50:48 by emedeiro          #+#    #+#             */
-/*   Updated: 2024/08/20 14:35:17 by emedeiro         ###   ########.fr       */
+/*   Updated: 2024/08/20 16:23:10 by emedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-
-#include <fcntl.h> // Para open
-#include <unistd.h> // Para close
-#include "fdf.h"    // Inclua o cabeçalho apropriado para sua definição de t_point e outras funções
 
 t_point **parse_map(char *file_name)
 {
@@ -68,10 +64,7 @@ t_point	**allocate_dots(char *file_name)
 	}
 	if (line)
 		free(line);
-	matrix = (t_point **)malloc(sizeof(t_point *) * (++y + 1));
-	while (y > 0)
-		matrix[--y] = (t_point *)malloc(sizeof(t_point) * (x + 1));
-	close(fd);
+	matrix = create_malloc_matrix(y, x);
 	return (matrix);
 }
 int	get_dots(char *line, t_point **matrix, int y)

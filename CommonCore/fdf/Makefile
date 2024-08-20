@@ -6,7 +6,7 @@
 #    By: emedeiro <emedeiro@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/06 16:10:18 by emedeiro          #+#    #+#              #
-#    Updated: 2024/08/20 11:16:44 by emedeiro         ###   ########.fr        #
+#    Updated: 2024/08/20 16:28:23 by emedeiro         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,7 @@ MINILIBX = -L ./minilibx-linux -lmlx -Ilmlx -lXext -lX11 -lbsd -lm
 SRCS = color_manipulation.c draw_manipulation.c draw_util.c  draw_util2.c\
 	error_manipulation.c fdf.c init_manipulation.c key_manipulation.c \
 	parse_manipulation.c parse_utils.c key_manipulation2.c \
-	colors.c
+	colors.c allocate_dots_malloc.c free.c
 
 ## OBJECT FILES ##
 OBJS = $(SRCS:.c=.o)
