@@ -3,55 +3,73 @@
 /*                                                        :::      ::::::::   */
 /*   philosophers.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emedeiro <emedeiro@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: emedeiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/23 15:18:45 by emedeiro          #+#    #+#             */
-/*   Updated: 2024/09/23 15:18:45 by emedeiro         ###   ########.fr       */
+/*   Created: 2024/10/28 18:04:11 by emedeiro          #+#    #+#             */
+/*   Updated: 2024/10/28 22:52:30 by emedeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHILOSOPHERS_H
 # define PHILOSOPHERS_H
 
-#include "libft/libft.h0"
 # include <stdio.h>
-# include <unistd.h>
 # include <stdlib.h>
+# include <unistd.h>
 # include <sys/time.h>
+# include <pthread.h>
 
+# define ERR_USAGE "Usage: ./philo <# philosophers> <time to die> <time to \
+                     eat> <time to sleep> [# times each philosopher must eat]\n"
+#define ERR_FORKS "Error: Forks initialization failed\n"
+#define ERR_PHILO "Error: Philo initialization failed\n"
+#define ERR_MALLOC "Error: malloc failed\n"
+#define ERR_THREAD "Error: thread creation failed\n"
+#define ERR_MUTEX "Error: mutex creation failed\n"
+#define ERR_TIME "Error: gettimeofday failed\n"
+#define ERR_USLEEP "Error: usleep failed\n"
+#define ERR_JOIN "Error: thread join failed\n"
+#define ERR_DESTROY "Error: mutex destroy failed\n"
+#define ERR_INIT "Error: mutex init failed\n"
+#define ERR_LOCK "Error: mutex lock failed\n"
+#define ERR_UNLOCK "Error: mutex unlock failed\n"
+
+# define RESET    "\033[0m"
+# define RED      "\033[31m"    /* Red */
+# define GREEN    "\033[32m"    /* Green */
+
+
+typedef struct s_mutexes
+{
+    pthread_mutex_t *left_fork;
+    pthread_mutex_t *right_fork;
+    pthread_mutex_t *meal_lock;
+}   t_mutexes;
+
+typedef struct s_time
+{
+    int die;
+    int eat;
+    int sleep;
+    int last_meal;
+}   t_time;
 
 typedef struct s_philo
 {
-    int id;
-    pthread_t thread;
-    int left_fork;
-    int right_fork;
-    int eat_count;
-    struct s_table *table;
-    struct timeval last_meal;
+    int id_philo;
+    t_time times;
+    t_mutexes mutexes;
+    int need_to_eat;
+    int meals_eaten;
+    int philo_count;
 }   t_philo;
 
-typedef struct s_table
+typedef struct philo_data
 {
-    int philo_count;
-    int time_to_die;
-    int time_to_eat;
-    int time_to_sleep;
-    int must_eat_count;
-    int someone_died;
-    pthread_mutex_t *forks;
-    pthread_mutex_t print;
+    pthread_mutex_t  *forks;
     t_philo *philos;
-    struct timeval start;
-}   t_table;
+    pthread_mutex_t  meal_lock;    
+}   t_philo_data;
 
-int init_table(t_table *table, int argc, char **argv);
-void *start_simulation(void *arg);
-void *philosopher(void *arg);
-void take_forks(t_philo *philo);
-void put_forks(t_philo *philo);
-void eat(t_philo *philo);
-void sleep(t_philo *philo);
-void think(t_philo *philo);
-void print_status(t_philo *philo, char *status);
+
 #endif
