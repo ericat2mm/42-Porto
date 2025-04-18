@@ -87,7 +87,7 @@ x(2D) = x'− z′
 y(2D) = y' - z′
 
 → Draw map
-To print the map centered in the middle of the window, we need to subtract half of the map's width from x and half of the map's height from y
+- To print the map centered in the middle of the window, we need to subtract half of the map's width from x and half of the map's height from y
 
 ```c
 void draw(t_point **matrix, t_fdf *data)
@@ -117,7 +117,7 @@ menu(data);
 ```
 
 → Translation
-Add two variables to the structure: direction y and direction x
+- Add two variables to the structure: direction y and direction x
 
 `a→x += WIN_WIDTH / 2 + x_translate;`
 `b→x += WIN_WIDTH / 2 + x_translate;`
@@ -125,5 +125,5 @@ Add two variables to the structure: direction y and direction x
 `b→y += WIN_HEIGHT / 2 + y_translate;`
 
 → Zoom
-The same applies to zoom.
+- The same applies to zoom.
 Choose a pair of keys that, whenever pressed, will increase or decrease the zoom factor mentioned earlier, depending on whether you want to zoom in or out.
