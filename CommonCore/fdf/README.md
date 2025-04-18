@@ -118,6 +118,7 @@ menu(data);
 
 → Translation
 Add two variables to the structure: direction y and direction x
+
 `a→x += WIN_WIDTH / 2 + x_translate;`
 `b→x += WIN_WIDTH / 2 + x_translate;`
 `a→y += WIN_HEIGHT / 2 + y_translate;`
