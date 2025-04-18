@@ -25,17 +25,17 @@ A fase **Common Core** expande as competências para projetos mais avançados, f
 
 ### 📌 Projetos em Destaque:
 
-| Projeto           | Descrição                                                                 |
-|-------------------|---------------------------------------------------------------------------|
-| **Libft**         | Recriação de funções da biblioteca C padrão.                              |
-| **ft_printf**     | Implementação da função `printf` em C.                                    |
-| **get_next_line** | Leitura de ficheiros linha a linha, sem usar `fgets` ou `getline`.        |
-| **Born2beroot**   | Configuração de servidor Linux com UFW, SSH, Sudo e mais.                 |
-| **Push_swap**     | Algoritmo para ordenar números com pilhas e poucas operações.             |
-| **So_long**       | Jogo 2D simples com movimentação, inimigos e mapa.                        |
-| **Minishell**     | Criação de uma shell funcional que interpreta e executa comandos.         |
-
-📁 [Ver Pasta CommonCore42](https://github.com/ericat2mm/42-Porto/tree/main/CommonCore42)
+| Projeto           | Descrição                                                                                      |
+|-------------------|------------------------------------------------------------------------------------------------|
+| **Libft**         | Recriação de funções da biblioteca C padrão.                                                   |
+| **ft_printf**     | Implementação da função `printf` em C.                                                         |
+| **get_next_line** | Leitura de ficheiros linha a linha, sem usar `fgets` ou `getline`.                             |
+| **Born2beroot**   | Configuração de servidor Linux com UFW, SSH, Sudo e mais.                                      |
+| **Push_swap**     | Algoritmo para ordenar números com pilhas e poucas operações.                                  |
+| **Minitalk**      | Envia mensagens entre processos usando sinais Unix.                                            |
+| **FDF**           | Visualizador 3D de mapas em wireframe a partir de ficheiros com coordenadas.                   |
+| **Philosophers**  | Simula o clássico problema dos filósofos, focando em concorrência e sincronização com threads. |
+| **Minishell**     | Criação de uma shell funcional que interpreta e executa comandos.                              |
 
 ---
 
