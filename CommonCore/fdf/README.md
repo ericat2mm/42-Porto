@@ -2,9 +2,7 @@
 
 **LINGUAGEM:** C  
 **DATA INÍCIO:** 18 de Junho de 2024  
-**DATA TÉRMINO:** 21 de Agosto de 2024  
-**STATUS:** Concluído
-
+**DATA TÉRMINO:** 21 de Agosto de 2024
 ---
 
 ## 📋 Objetivo
