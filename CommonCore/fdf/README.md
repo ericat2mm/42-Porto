@@ -82,3 +82,50 @@ void isometric(t_point *dot, double angle) {
   dot->x = (dot->x - dot->y) * cos(angle);
   dot->y = (dot->x + dot->y) * sin(angle) - dot->z;
 }
+
+→ Projeção de ponto
+Calculate for each point:
+x(2D) = x−
+′ z′
+y(2D) = y−
+′ z′
+Draw map
+void draw(t_point **matri
+{
+int y;
+int x;
+FDF 7
+y = 0;
+while (matrix[y])
+{
+To print the map centered in the
+middle of the window, we need to
+subtract half of the map's width from
+x and half of the map's height from y
+x = 0;
+while (1)
+{
+if (matrix[y + 1
+draw_line(ma
+if (!matrix[y][x
+draw_line(ma
+if (matrix[y][x]
+break ;
+x++;
+}
+y++;
+}
+push_image_to_window(dat
+menu(data);
+}
+Translation
+→ Add two variables to the structure: direction y and direction x
+a→x += WIN_WIDTH / 2 + x_translate;
+b→x += WIN_WIDTH / 2 + x_translate;
+a→y += WIN_HEIGHT / 2 + y_translate;
+b→y += WIN_HEIGHT / 2 + y_translate;
+Zoom
+FDF 8
+The same applies to zoom. Choose a pair of keys that, whenever pressed, will
+increase or decrease the zoom factor mentioned earlier, depending on whether
+you want to zoom in or out.
