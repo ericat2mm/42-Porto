@@ -21,11 +21,13 @@ Este projeto reforça conhecimentos sobre manipulação de bits, sinais, comunic
 
 ## 🔍 Conceitos Importantes
 
-| Conceito              | Descrição                                                            |
-| **SIGUSR1 / SIGUSR2** | Sinais usados para representar os bits `1` e `0`                     |
-| **signal**            | Define uma função que será chamada quando um sinal for capturado     |
-| **getpid**            | Obtém o PID (Process ID) do processo atual                           |
-| **kill**              | Envia um sinal para um processo específico, identificando-o pelo PID |
+| Conceito        | Descrição |
+|----------------|-----------|
+| **SIGUSR1 / SIGUSR2** | Sinais usados para representar os bits `1` e `0`<br>São utilizados para transmitir os dados binários entre cliente e servidor. |
+| **signal**     | Define uma função que será chamada quando um sinal for capturado.<br>Permite tratar sinais personalizados, como SIGUSR1 e SIGUSR2. |
+| **getpid**     | Obtém o PID (Process ID) do processo atual.<br>O cliente usa esta informação para saber para onde enviar a mensagem. |
+| **kill**       | Envia um sinal para um processo específico identificado pelo PID.<br>Usada para transmitir os bits da mensagem ao servidor. |
+
 
 ---
 
