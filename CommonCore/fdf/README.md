@@ -1,10 +1,5 @@
 # FDF - Visualização de Mapas 3D
 
-**LINGUAGEM:** C  
-**DATA INÍCIO:** 18 de Junho de 2024  
-**DATA TÉRMINO:** 21 de Agosto de 2024
----
-
 ## 📋 Objetivo
 
 O **FDF** é um projeto que tem como objetivo criar um visualizador 3D de mapas a partir de um arquivo com coordenadas. A visualização do mapa será feita utilizando uma projeção isométrica, renderizada em uma janela gráfica com a **MiniLibX**, permitindo a visualização e interação com o mapa.
